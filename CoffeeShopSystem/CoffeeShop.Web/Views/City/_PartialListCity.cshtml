@@ -1,0 +1,6 @@
+﻿@model IEnumerable<CoffeeShop.Model.ModelEntity.City>
+
+@foreach(var item in Model)
+{
+    <option value="@item.ID">@item.Name</option>
+}

@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{90579D2A-7FD5-4D6E-A31A-643832B98E61}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoffeeShop.Web</RootNamespace>
+    <AssemblyName>CoffeeShop.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountManagementController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\GroupTableController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MaterialCategoryController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\MaterialLogController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderProductController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
+    <Compile Include="Controllers\ShopManagementController.cs" />
+    <Compile Include="Controllers\TableController.cs" />
+    <Compile Include="Controllers\WardController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\UpDateOrder.cs" />
+    <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
+    <Compile Include="Infrastructure\Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationGroupViewModel.cs" />
+    <Compile Include="Models\ApplicationRoleViewModel.cs" />
+    <Compile Include="Models\ApplicationUserViewModel.cs" />
+    <Compile Include="Models\DistrictViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MaterialCategoryViewModel.cs" />
+    <Compile Include="Models\MaterialViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\WardViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Asserts\CSS\style.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.bootstrap.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.bootstrap.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.bootstrap4.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.foundation.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.foundation.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.jqueryui.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.jqueryui.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.material.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.material.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.semanticui.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.semanticui.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.uikit.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\dataTables.uikit.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\jquery.dataTables.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\jquery.dataTables.min.css" />
+    <Content Include="Asserts\DataTables-1.10.15\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Asserts\DataTables-1.10.15\images\favicon.ico" />
+    <Content Include="Asserts\DataTables-1.10.15\images\sort_asc.png" />
+    <Content Include="Asserts\DataTables-1.10.15\images\sort_asc_disabled.png" />
+    <Content Include="Asserts\DataTables-1.10.15\images\sort_both.png" />
+    <Content Include="Asserts\DataTables-1.10.15\images\sort_desc.png" />
+    <Content Include="Asserts\DataTables-1.10.15\images\sort_desc_disabled.png" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.bootstrap.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.bootstrap.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.bootstrap4.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.foundation.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.foundation.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.jqueryui.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.jqueryui.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.material.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.material.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.semanticui.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.semanticui.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.uikit.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\dataTables.uikit.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\jquery.dataTables.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\jquery.dataTables.min.js" />
+    <Content Include="Asserts\DataTables-1.10.15\js\jquery.js" />
+    <Content Include="Asserts\DuyVM2.css" />
+    <Content Include="Asserts\jquery-validation-1.16.0\additional-methods.js" />
+    <Content Include="Asserts\jquery-validation-1.16.0\additional-methods.min.js" />
+    <Content Include="Asserts\jquery-validation-1.16.0\jquery.validate.js" />
+    <Content Include="Asserts\jquery-validation-1.16.0\jquery.validate.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\additional-methods.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\additional-methods.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\jquery.validate.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\jquery.validate.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ar.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ar.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_az.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_az.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_bg.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_bg.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_bn_BD.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_bn_BD.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ca.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ca.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_cs.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_cs.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_da.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_da.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_de.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_de.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_el.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_el.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es_AR.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es_AR.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es_PE.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_es_PE.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_et.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_et.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_eu.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_eu.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fa.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fa.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fi.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fi.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fr.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_fr.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ge.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ge.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_gl.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_gl.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_he.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_he.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hr.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hr.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hu.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hu.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hy_AM.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_hy_AM.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_id.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_id.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_is.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_is.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_it.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_it.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ja.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ja.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ka.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ka.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_kk.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_kk.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ko.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ko.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_lt.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_lt.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_lv.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_lv.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_mk.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_mk.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_my.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_my.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_nl.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_nl.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_no.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_no.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pl.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pl.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pt_BR.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pt_BR.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pt_PT.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_pt_PT.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ro.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ro.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ru.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ru.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sd.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sd.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_si.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_si.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sk.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sk.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sl.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sl.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sr.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sr.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sr_lat.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sr_lat.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sv.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_sv.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_th.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_th.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_tj.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_tj.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_tr.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_tr.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_uk.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_uk.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ur.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_ur.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_vi.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_vi.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_zh.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_zh.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_zh_TW.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\messages_zh_TW.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_de.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_de.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_es_CL.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_es_CL.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_fi.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_fi.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_nl.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_nl.min.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_pt.js" />
+    <Content Include="Asserts\jquery-validation-1.17.0\localization\methods_pt.min.js" />
+    <Content Include="Asserts\JS\Script.js" />
+    <Content Include="Asserts\template\newuser.html" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.min.css" />
+    <Content Include="Content\dist\css\bootstrap-theme.css" />
+    <Content Include="Content\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Content\dist\css\bootstrap.css" />
+    <Content Include="Content\dist\css\bootstrap.min.css" />
+    <Content Include="Content\dist\css\style.css" />
+    <Content Include="Content\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\dist\js\bootstrap.js" />
+    <Content Include="Content\dist\js\bootstrap.min.js" />
+    <Content Include="Content\dist\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\dist\js\npm.js" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\KieuNTL1_style.css" />
+    <Content Include="Content\Order.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome\.gitignore" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap-progressbar.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\font-awesome\.bower.json" />
+    <Content Include="fonts\font-awesome\.npmignore" />
+    <Content Include="fonts\font-awesome\bower.json" />
+    <Content Include="Content\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Content\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\dist\css\bootstrap.css.map" />
+    <Content Include="Content\dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Asserts\DataTables-1.10.15\images\Sorting icons.psd" />
+    <Content Include="AppSettings.config" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Controllers\MaterialController.js" />
+    <Content Include="Scripts\custom.min.js" />
+    <Content Include="Scripts\DatHT5.js" />
+    <Content Include="Scripts\GroupTable.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\KieuNTL1_script.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\Order.js" />
+    <Content Include="Scripts\plugins\jquery.twbsPagination.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Table.js" />
+    <Content Include="Scripts\TrungLM1.js" />
+    <Content Include="Scripts\VoCP\city.js" />
+    <Content Include="Scripts\VoCP\district.js" />
+    <Content Include="Scripts\VoCP\ward.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Test.cshtml" />
+    <Content Include="Views\MaterialLog\Index.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\Promotion\Index.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\Shared\_ShareContent.cshtml" />
+    <Content Include="Views\AccountManagement\CreateNew.cshtml" />
+    <Content Include="Views\AccountManagement\Edit.cshtml" />
+    <Content Include="Views\AccountManagement\Index.cshtml" />
+    <Content Include="Views\AccountManagement\PartialViewListShop.cshtml" />
+    <Content Include="Views\Category\ListCate.cshtml" />
+    <Content Include="Views\GroupTable\Search.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\ShopManagement\Index.cshtml" />
+    <Content Include="Views\ShopManagement\PartialViewAddShop.cshtml" />
+    <Content Include="Views\ShopManagement\PartialViewEditShop.cshtml" />
+    <Content Include="Views\ShopManagement\PartialViewListCity.cshtml" />
+    <Content Include="Views\ShopManagement\PartialViewListDistrict.cshtml" />
+    <Content Include="Views\ShopManagement\PartialViewListWard.cshtml" />
+    <Content Include="Views\ShopManagement\SearchByNameOrDescription.cshtml" />
+    <Content Include="Views\Table\Search.cshtml" />
+    <Content Include="Views\ShopUser\Index.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\City\_PartialListCity.cshtml" />
+    <Content Include="Views\District\Index.cshtml" />
+    <Content Include="Views\District\_PartialListDistrict.cshtml" />
+    <Content Include="Views\Ward\Index.cshtml" />
+    <Content Include="Views\MaterialCategory\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Asserts\admin\" />
+    <Folder Include="fonts\font-awesome\fonts\" />
+    <Folder Include="fonts\font-awesome\less\" />
+    <Folder Include="fonts\font-awesome\scss\" />
+    <Folder Include="Views\Acountt\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeShop.Common\CoffeeShop.Common.csproj">
+      <Project>{e2926c61-559e-42bb-8bfb-d3aae2d7bbd1}</Project>
+      <Name>CoffeeShop.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeShop.Data\CoffeeShop.Data.csproj">
+      <Project>{d98a5f7f-2742-423b-ae1a-58bb01490c42}</Project>
+      <Name>CoffeeShop.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeShop.Model\CoffeeShop.Model.csproj">
+      <Project>{bb0c5481-04f0-4d69-acef-9ce49bcdb070}</Project>
+      <Name>CoffeeShop.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeShop.Service\CoffeeShop.Service.csproj">
+      <Project>{66b22729-b3ea-471f-bb2a-4e5ecb7f5378}</Project>
+      <Name>CoffeeShop.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>31341</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:31341/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

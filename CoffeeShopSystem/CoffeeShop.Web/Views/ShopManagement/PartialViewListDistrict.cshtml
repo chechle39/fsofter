@@ -1,0 +1,8 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model List<District>
+
+
+@foreach (District d in @Model)
+{
+    <option value="@d.ID" @if (@d.ID == ViewBag.DistrictID) {<text>selected="selected"</text>} >@d.Name</option>
+}

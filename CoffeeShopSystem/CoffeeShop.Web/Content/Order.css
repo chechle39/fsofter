@@ -1,0 +1,17 @@
+﻿ #tbOrderProduct tr {
+        width: 100%;
+        display: inline-table;
+        table-layout: fixed;
+    }
+
+    #tbOrderProduct {
+        height: 240px;
+        display: -moz-groupbox;
+    }
+
+        #tbOrderProduct tbody {
+            overflow-y: scroll;
+            height: 200px;
+            /*width: 100%;*/
+            position: absolute;
+        }

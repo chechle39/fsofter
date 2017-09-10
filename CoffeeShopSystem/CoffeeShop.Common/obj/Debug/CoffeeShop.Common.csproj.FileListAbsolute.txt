@@ -1,0 +1,12 @@
+C:\Users\TuanLT6\Desktop\C79_HCM_FR_NET\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\CoffeeShop.Common.dll
+C:\Users\TuanLT6\Desktop\C79_HCM_FR_NET\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\CoffeeShop.Common.pdb
+C:\Users\TuanLT6\Desktop\C79_HCM_FR_NET\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.csprojResolveAssemblyReference.cache
+C:\Users\TuanLT6\Desktop\C79_HCM_FR_NET\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.dll
+C:\Users\TuanLT6\Desktop\C79_HCM_FR_NET\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.pdb
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\CoffeeShop.Common.dll
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\CoffeeShop.Common.pdb
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\System.Configuration.Abstractions.dll
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\bin\Debug\System.Configuration.Abstractions.pdb
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.csprojResolveAssemblyReference.cache
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.dll
+C:\Users\TuanLT6\Desktop\SVN1\trunk\projects\FaskTrack_CSM\CoffeeShopSystem\CoffeeShop.Common\obj\Debug\CoffeeShop.Common.pdb

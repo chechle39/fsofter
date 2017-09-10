@@ -1,0 +1,444 @@
+﻿@model IEnumerable<CoffeeShop.Model.ModelEntity.ShopUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var mateList = ViewBag.MateList as IEnumerable<CoffeeShop.Model.ModelEntity.Material>;
+}
+@section css{
+    <link href="~/Asserts/DataTables-1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .help-clock {
+            color: #a94442;
+        }
+    </style>
+<link href="~/Content/DatHT5.css" rel="stylesheet" />
+
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Quản lý nhân viên</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li style="float:right">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content" style="display: block;">
+            <div class="row">
+                <div class="col-sm-8">
+                    <form>
+                        <label class="radio-inline">
+                            <input type="radio" name="viewOption" checked="checked" value="false">Đang quản lý
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="viewOption" value="true">Đã xóa
+                        </label>
+                    </form>
+                </div>
+
+            </div>
+            <div class="panel panel-default panel-table" style="margin-top: 20px">
+                <div class="addbtn">
+                    <a href="javascript:;" id="btnAddNew" data-toggle="modal" data-target="#AddModal" title="Thêm mới" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></a>
+                </div>
+                <div class="lengthpage">
+                    <div class="float-left">
+                        <select class="form-control text-center" id="lengthpage">
+                            <option value="0" disabled>Hiển thị</option>
+                            <option value="5">5</option>
+                            <option selected value="10">10</option>
+                            <option value="50">50</option>
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <a style="float: right; margin-top: 5px" data-click="0" href="javascript:;" id="AddvancedButton" title="Chuyển tùy chọn tìm kiếm" class="btn btn-danger"><i class="fa fa-cogs"></i></a>
+                <div class="searchbox">
+
+                    <div id="basesearch" class="searchbox-hiden">
+                        <div class="form-groups">
+                            <div class="col-sm-12">
+                                <input type="text" id="baseSearch" title="Tên bàn, nhóm bàn, số lượng, mô tả ..." class="form-control" placeholder="Từ khóa">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="advancedsearch" class="hidden searchbox-hiden">
+                            <div class="form-groups">
+                                <div class="col-sm-6">
+                                    <select class="form-control" title="Giới tính" id="SexSearch">
+                                        <option value="">Tất cả</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select class="form-control" title="Vị trí" id="RoleSearch">
+                                        <option value="">Tất cả</option>
+                                        <option value="Đầu bếp">Đầu bếp</option>
+                                        <option value="Nhân viên">Nhân viên</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="panel-body clearfix">
+                    <table class="display table table-striped table-bordered table-responsive jambo_table bulk_action" id="mainTable">
+                        <thead>
+                            <tr class="headings">
+                                <th>#</th>
+                                <th>Họ tên</th>
+                                <th>Tài khoản</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                <th>Giới tính</th>
+                                <th>Vị trí</th>
+                                <th style="text-align:center"><i class="fa fa-cog"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody" class="tbody">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="even pointer" id="tr-@item.ID">
+                                    <td>@item.ID</td>
+                                    <td>@item.User.Name</td>
+                                    <td>@item.User.Username</td>
+                                    <td>@item.User.Email</td>
+                                    <td>@item.User.DetailAddress - @item.User.Ward.Name - @item.User.Ward.District.Name - @item.User.Ward.District.City.Name</td>
+                                    <td>@item.User.Sex</td>
+                                    <td>@(item.RoleID==3 ? "Nhân viên" : "Đầu bếp")</td>
+                                    <td align="center">
+                                        <a class="btn btn-info btn-xs edit"  title="Chỉnh sửa" data-shopuserid="@item.ID" data-shopid="@item.ShopID"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs delete" title="Xóa" data-id="@item.ID" data-shopid="@item.ShopID" data-userid="@item.UserID"
+                                           data-roleid="@item.RoleID" data-description="@item.Description" data-isdelete="true"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*create popup Add shopuser*@
+<div id="AddModal" class="modal fade" role="dialog" style="margin:auto;">
+    <div class="modal-dialog" style="width:700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông tin nhân viên</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="AddForm">
+                    <fieldset id="SubmitForm">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="IsDeleteTextbox" name="IsDelete" value="false">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="AddShopUserIDTextbox" name="shopUserID">
+                        </div>
+                        <div class="form-group">
+                            <label for="NameTextbox" class="col-sm-4 control-label">Họ tên (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="NameTextbox" placeholder="Họ tên" name="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="UsernameTextbox" class="col-sm-4 control-label">Tên tài khoản (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="UsernameTextbox" placeholder="Username" name="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EmailTextbox" class="col-sm-4 control-label">Email (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EmailTextbox" placeholder="Email" name="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="PasswordTextbox" class="col-sm-4 control-label">Mật khẩu (*)</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="PasswordTextbox" placeholder="Mật khẩu" name="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="RePasswordTextbox" class="col-sm-4 control-label">Nhập lại mật khẩu (*)</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="RePasswordTextbox" placeholder="Nhập lại mật khẩu" name="RePassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Role" class="col-sm-4 control-label">Vị trí (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="role" id="Role">
+                                    <option value="0">Vị trí</option>
+                                    @foreach (var item in ViewBag.RoleList)
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="RoleDescriptionTextbox" class="col-sm-4 control-label">Mô tả vị trí</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="RoleDescriptionTextbox" placeholder="Nhân viên cửa hàng A,B,C...." name="roleDescription">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="CityList" class="col-sm-4 control-label">Thành phố (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="CityList" name="City">
+                                    <option value="0">Thành phố</option>
+                                    @foreach (var item in ViewBag.CityList)
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DistrictList" class="col-sm-4 control-label">Quận (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="DistrictList" name="District">
+                                    <option value="0">Quận</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="WardList" class="col-sm-4 control-label">Phường (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="WardList" name="WardID">
+                                    <option value="0">Phường</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DetailAddressTextbox" class="col-sm-4 control-label">Địa chỉ chi tiết</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="DetailAddressTextbox" placeholder="Ví dụ: Số 10 đường 5" name="DetailAddress">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="BirthDayTextbox" class="col-sm-4 control-label">Ngày sinh (*)</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="BirthDayTextbox" placeholder="MM/DD/YYYY" name="BirthDay">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="GenderList" class="col-sm-4 control-label">Giới tính (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="GenderList" name="Sex">
+                                    <option value="0">GIới tính</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionTextbox" class="col-sm-4 control-label">Thông tin thêm</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="DescriptionTextbox" placeholder="Thông tin thêm" name="Description">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="SubmitAdd">Submit</button>
+                <button class="btn btn-default" id="" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*/ endcreate popup*@
+
+@*create popup Edit shopuser*@
+<div id="EditModal" class="modal fade" role="dialog" style="margin:auto;">
+    <div class="modal-dialog" style="width:700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông tin nhân viên</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="EditForm">
+                    <fieldset id="SubmitForm">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="IsDeleteTextbox" name="IsDelete" value="false">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="EditUserIDTextbox" name="ID">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="EditShopUserIDTextbox" name="shopUserID">
+                        </div>
+                        <div class="form-group">
+                            <label for="EditNameTextbox" class="col-sm-4 control-label">Họ tên (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditNameTextbox" placeholder="Họ tên" name="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditUsernameTextbox" class="col-sm-4 control-label">Tên tài khoản (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditUsernameTextbox" placeholder="Username" name="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditEmailTextbox" class="col-sm-4 control-label">Email (*)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditEmailTextbox" placeholder="Email" name="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditPasswordTextbox" class="col-sm-4 control-label">Mật khẩu (*)</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="EditPasswordTextbox" placeholder="Mật khẩu" name="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditRePasswordTextbox" class="col-sm-4 control-label">Nhập lại mật khẩu (*)</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="EditRePasswordTextbox" placeholder="Nhập lại mật khẩu" name="RePassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditRole" class="col-sm-4 control-label">Vị trí (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="role" id="EditRole">
+                                    <option value="0">Vị trí</option>
+                                    @foreach (var item in ViewBag.RoleList)
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditRoleDescriptionTextbox" class="col-sm-4 control-label">Mô tả vị trí</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditRoleDescriptionTextbox" placeholder="Nhân viên cửa hàng A,B,C...." name="roleDescription">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditCityList" class="col-sm-4 control-label">Thành phố (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="EditCityList" name="City">
+                                    <option value="0">Thành phố</option>
+                                    @foreach (var item in ViewBag.CityList)
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditDistrictList" class="col-sm-4 control-label">Quận (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="EditDistrictList" name="District">
+                                    <option value="0">Quận</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditWardList" class="col-sm-4 control-label">Phường (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="EditWardList" name="WardID">
+                                    <option value="0">Phường</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditDetailAddressTextbox" class="col-sm-4 control-label">Địa chỉ chi tiết</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditDetailAddressTextbox" placeholder="Ví dụ: Số 10 đường 5" name="DetailAddress">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditBirthDayTextbox" class="col-sm-4 control-label">Ngày sinh (*)</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="EditBirthDayTextbox" placeholder="MM/DD/YYYY" name="BirthDay">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditGenderList" class="col-sm-4 control-label">Giới tính (*)</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="EditGenderList" name="Sex">
+                                    <option value="0">Giới tính</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EditDescriptionTextbox" class="col-sm-4 control-label">Thông tin thêm</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="EditDescriptionTextbox" placeholder="Thông tin thêm" name="Description">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" id="SubmitEdit">Submit</a>
+                <a class="btn btn-default" id="" data-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*end create popup*@
+
+@*Create A PopUp Modal For DeleteConfirmation*@
+<div class="modal fade" id="DeleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h4>THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có chắc muốn xóa ?</h4>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" data-dismiss="modal" id="r">Cancel</a>
+                <a class="btn btn-danger" id="btnConfirmDelete" data-id="">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*/Create A PopUp Modal For DeleteConfirmation*@
+
+@*Create A PopUp Modal For DeleteConfirmation*@
+<div class="modal fade" id="RecoverConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h4>THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có chắc muốn phục hồi ?</h4>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" data-dismiss="modal" id="r">Cancel</a>
+                <a class="btn btn-danger" id="btnConfirmRecover" data-id="">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*/Create A PopUp Modal For DeleteConfirmation*@
+
+@section js{
+    <script src="~/Asserts/DataTables-1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="~/Asserts/DataTables-1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-validation-1.17.0/jquery.validate.min.js"></script>
+    <script src="~/Scripts/ShopUser.js"></script>
+}

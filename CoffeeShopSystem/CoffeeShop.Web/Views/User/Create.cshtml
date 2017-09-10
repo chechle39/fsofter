@@ -1,0 +1,81 @@
+﻿@model CoffeeShop.Web.Models.ApplicationUserViewModel
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(false, "", new { @class = "error" })
+
+    <div class="form-horizontal" method="post" action="" name="addAccountForm" id="addAccountForm">
+        @*<div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Username : </label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model., new { @class = "form-control", @autofocus = "autofocus" })
+                </div>
+
+            </div>*@
+        @*<div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Tên đăng nhập: </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Tên đăng nhập: </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Họ và tên: </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Email: </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Họ và tên: </label>
+            <div class="col-sm-4">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Số điện thoại: </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @autofocus = "autofocus" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">GroupId:</label>
+            <div class="col-sm-4">
+                @*@Html.DropDownList("GroupId", (IEnumerable<SelectListItem>)ViewBag.GroupId, "Vui lòng chọn")*@
+                @Html.DropDownListFor(model => model.Groups, null, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+   
+        @*<div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Role:</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("RoleID", (IEnumerable<SelectListItem>)ViewBag.RoleID, "Vui lòng chọn")
+
+            </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-save"></i>&nbsp;Lưu
+                    </button>
+                    <a href="@Url.Action("Index","User")" class="btn btn-success">
+                        <i class="glyphicon glyphicon-share-alt"></i>&nbsp;Danh sách tài khoản
+                    </a>
+                </div>
+            </div>
+        </div>
+}

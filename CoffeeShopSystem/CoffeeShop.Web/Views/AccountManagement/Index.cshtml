@@ -1,0 +1,374 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model List<User>
+    
+@section css
+    {
+       
+<link href="c:\users\huanth\desktop\mockv3\mock\[warning]not upload to snv\project\structure\coffeeshopsystem\coffeeshop.common\assets\bootstrap v3.3.7\css\bootstrap.min.css" rel="stylesheet" />
+       <style type="text/css">
+    .modal-dialog {
+        position: absolute;
+        left: 50%;
+        /* now you must set a margin left under zero - value is a half width your window */
+        margin-left: -312px;
+        /* this same situation is with height - example */
+        height: 500px;
+        top: 50%;
+        margin-top: -250px;
+    }
+
+           .modal.fade:not(.in).right .modal-dialog {
+               -webkit-transform: translate3d(25%, 0, 0);
+               transform: translate3d(25%, 0, 0);
+           }
+               
+            .error
+           {
+                color:red;
+           }
+
+
+           .errorText {
+               align:right;
+           }
+               
+</style>
+    }
+
+
+
+<div class="container">
+    <div class="row">
+        <h1>Quản Lý Tài Khoản</h1>
+        <br />
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        <button type="button" class="btn btn-info btn-sm" id="btnCreateNew" onclick="RedirectToPageAdd()">
+
+           <icon class="glyphicon glyphicon-plus"> </icon>
+            Tạo mới
+            
+            
+
+        </button>
+            </div>
+
+    
+
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <form name="searchForm" id="searchForm" action="" method="get">
+                        <input id="phoneFilter" name="phoneFilter" type="text" class="form-control input-sm" placeholder="Nhập số phone cần tìm..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-sm" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="errorText"></div>
+                </div>
+               
+            </div>
+            
+
+
+        </div>
+
+
+    </div>
+        <div> <br /></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="tablecontent">
+                    <table id ="accTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fullname</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                                <th> &nbsp;</th>
+                            </tr>
+
+                        </thead>
+                        <tbody id="tbodyList">
+                            @foreach (User user in @Model)
+                            {
+                                <tr>
+
+                                    <td>@user.ID</td>
+                                    <td>@user.Name</td>
+                                    <td>@user.Username</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.Phone</td>
+                                    <td>@user.DetailAddress</td>
+                                    <td>@user.Birthday</td>
+                                    <td>@user.Sex</td>
+                                    <td>
+                                        <button href='javascript:;' class="btn btn-success btn_Edit" type="submit" data-toggle="modal"  data-target="#editModal"  data-id="@user.ID">
+                                            <icon class="glyphicon glyphicon-pencil">
+                                            </icon>
+                                            Sửa
+                                        </button>
+
+                                        <button class="btn btn-danger btn_Delete" type="submit" data-toggle="modal" data-target="#deleteModal" data-id="@user.ID"><icon class="glyphicon glyphicon-remove"></icon> Xóa</button>
+                                    </td>
+                                </tr>
+
+
+
+                            }
+                        </tbody>
+
+
+           </table>
+
+                    <input type="hidden" id="hiddenfield" value=""/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Xác nhận xóa tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc muốn xóa tài khoản này?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-dismiss="modal">Chưa</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_ConfirmDelete">Xóa</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    @section js
+    {
+        
+<script src="c:\users\huanth\desktop\mockv3\mock\[warning]not upload to snv\project\structure\coffeeshopsystem\coffeeshop.common\assets\jquery-3.2.1.min.js"></script>
+<script src="c:\users\huanth\desktop\mockv3\mock\[warning]not upload to snv\project\structure\coffeeshopsystem\coffeeshop.common\assets\jquery 1.17.0\jquery.validate.min.js"></script>
+<script src="c:\users\huanth\desktop\mockv3\mock\[warning]not upload to snv\project\structure\coffeeshopsystem\coffeeshop.common\assets\bootstrap v3.3.7\js\bootstrap.min.js"></script>
+        <script type="text/javascript">
+
+
+
+            function KiemTraInput()
+            {
+                var inputPhone = $("#phoneFilter").val();
+
+                console.log(inputPhone);
+                for (var i = 0; i < inputPhone.length; i++)
+                {
+                    if (isNaN(inputPhone[i]))
+                    {
+
+
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+           
+
+
+            function ToDateFromJson(val)
+            {
+                var jsonDate = val;  // returns "/Date(1245398693390)/";
+                var re = /-?\d+/;
+                var m = re.exec(jsonDate);
+                var d = new Date(parseInt(m[0]));
+                return d;
+            }
+
+            function RedirectToPageAdd()
+            {
+                 window.location.href = "/AccountManagement/CreateNew";
+            }
+
+
+            $(function () {
+
+
+                $(".btn_Edit").click(function () {
+
+                    var Id = $(this).data('id');
+
+                    location.href = "/AccountManagement/Edit?id=" + Id;
+
+                });
+
+                $(".btn_Delete").click(function () {
+
+                    var Id = $(this).data('id');
+
+                    $("#hiddenfield").val(Id);
+
+
+                });
+
+                $("#btn_ConfirmDelete").click(function () {
+                    var Id = $("#hiddenfield").val();
+                    location.href = "/AccountManagement/Delete?id=" + Id;
+                });
+
+
+                jQuery.validator.addMethod("isNotContainChar", function (value, element) {
+                    return this.optional(element) || (KiemTraInput());
+                }, "Định dạng số điện thoại không hợp lệ.");
+
+
+
+                function btnEditClick()
+                {
+                    location.href = "/AccountManagement/Edit/" + id;
+                }
+
+
+
+
+
+
+                $("#searchForm").submit(function (e) {
+
+                    var frm = $("#searchForm");
+                    var phone = $("#phoneFilter").val();
+                    url = "/AccountManagement/SearchByPhone?phoneFilter=" + phone;
+
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        timeout : 30 * 1000,
+
+                        })
+
+
+
+                  .done(function (data) {
+
+                      $('#tbodyList').html("");
+                      $.each(data, function (i, user) {
+
+                          
+                          //var onlydate = user.birthdate.split("12:00AM");
+                          //console.log(onlydate);
+
+                          var html =
+                              '<tr>' +
+                                  '<td>' + user.ID  + '</td>' +
+                                  '<td>' + user.Name + '</td>' +
+                                  '<td>' + user.Username + '</td>' +
+                                  '<td>' + user.Email + '</td>' +
+                                  '<td>' + user.Phone + '</td>' +
+                                  '<td>' + user.DetailAddress + '</td>' +
+                                   '<td>' + user.Birthdate + '</td>' +
+                                   '<td>' + user.Gender + '</td>' +
+                                   '<td> <button class="btn btn-success" type="submit" id="btnEdit"  data-id="'  + user.ID + '">' +
+                                   '<icon class="glyphicon glyphicon-pencil"></icon>Sửa</button> &nbsp;<button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#deleteModal">' +
+                                   '<icon class="glyphicon glyphicon-remove"></icon> Xóa</button>'+
+                                   '</td>'+
+                                    '</tr>';
+
+                          $('#tbodyList').append(html);
+                      });
+
+                  })
+            .fail(function (jqXHR, textStatus, error) {
+                $('#tbodyList').html("");
+                var html = '<tr><td colspan="8" align="center">Không có dữ liệu cho kết quả vừa tìm.</td></tr>';
+                $('#tbodyList').append(html);
+
+
+            });
+                });
+
+
+
+
+
+
+                $("form[name='searchForm']").validate({
+                    // Specify validation rules
+                    rules: {
+                        // The key name on the left side is the name attribute
+                        // of an input field. Validation rules are defined
+                        // on the right side
+                        phoneFilter:
+                            {
+                                
+                                minlength: 10,
+                                isNotContainChar : true
+
+                            }
+
+
+                    },
+                    // Specify validation error messages
+                    messages: {
+
+                        phoneFilter: {
+                            
+                            minlength: "  Số điện thoại phải chứa tối thiểu 10 chữ số"
+
+                        }
+
+                    },
+
+
+                    // Make sure the form is submitted to the destination defined
+                    // in the "action" attribute of the form when valid
+
+                    errorElement: 'div',
+                    errorLabelContainer: ".errorText",
+                    submitHandler: function (form) {
+                        // khi có ajax thì không dùng form.submit()
+                        // form.submit();
+
+                    }
+                });
+
+
+
+
+
+            });
+
+
+        </script>
+    }

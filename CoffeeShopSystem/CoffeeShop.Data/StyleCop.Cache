@@ -1,0 +1,765 @@
+<stylecopresultscache>
+  <version>12</version>
+  <project key="1792730242">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="201708010559157_create.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2016/05/12 20:26:32.000</styleCop>
+      <settingsFile>2016/04/20 21:35:08.000</settingsFile>
+      <sourceFile>2017/08/01 14:44:25.611</sourceFile>
+      <parser>2016/05/12 20:26:32.000</parser>
+      <StyleCop.CSharp.DocumentationRules>2016/05/12 20:26:32.000</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-221033329</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2016/05/12 20:26:32.000</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2016/05/12 20:26:32.000</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2016/05/12 20:26:32.000</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
+        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
+        <line>1</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="PartialElementsMustBeDocumented" ruleCheckId="SA1601">
+        <context>The partial class element must have a documentation header containing either a summary tag or a content tag.</context>
+        <line>6</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="ElementMustBeginWithUpperCaseLetter" ruleCheckId="SA1300">
+        <context>class names begin with an upper-case letter: create.</context>
+        <line>6</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The method must have a documentation header.</context>
+        <line>8</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
+        <context>A closing curly bracket must not be preceded by a blank line.</context>
+        <line>299</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The method must have a documentation header.</context>
+        <line>301</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>303</line>
+        <index>14294</index>
+        <endIndex>14307</endIndex>
+        <startLine>303</startLine>
+        <startColumn>13</startColumn>
+        <endLine>303</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>304</line>
+        <index>14363</index>
+        <endIndex>14376</endIndex>
+        <startLine>304</startLine>
+        <startColumn>13</startColumn>
+        <endLine>304</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>305</line>
+        <index>14432</index>
+        <endIndex>14445</endIndex>
+        <startLine>305</startLine>
+        <startColumn>13</startColumn>
+        <endLine>305</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>306</line>
+        <index>14501</index>
+        <endIndex>14514</endIndex>
+        <startLine>306</startLine>
+        <startColumn>13</startColumn>
+        <endLine>306</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>307</line>
+        <index>14580</index>
+        <endIndex>14593</endIndex>
+        <startLine>307</startLine>
+        <startColumn>13</startColumn>
+        <endLine>307</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>308</line>
+        <index>14648</index>
+        <endIndex>14661</endIndex>
+        <startLine>308</startLine>
+        <startColumn>13</startColumn>
+        <endLine>308</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>309</line>
+        <index>14738</index>
+        <endIndex>14751</endIndex>
+        <startLine>309</startLine>
+        <startColumn>13</startColumn>
+        <endLine>309</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>310</line>
+        <index>14813</index>
+        <endIndex>14826</endIndex>
+        <startLine>310</startLine>
+        <startColumn>13</startColumn>
+        <endLine>310</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>311</line>
+        <index>14879</index>
+        <endIndex>14892</endIndex>
+        <startLine>311</startLine>
+        <startColumn>13</startColumn>
+        <endLine>311</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>312</line>
+        <index>14947</index>
+        <endIndex>14960</endIndex>
+        <startLine>312</startLine>
+        <startColumn>13</startColumn>
+        <endLine>312</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>313</line>
+        <index>15013</index>
+        <endIndex>15026</endIndex>
+        <startLine>313</startLine>
+        <startColumn>13</startColumn>
+        <endLine>313</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>314</line>
+        <index>15091</index>
+        <endIndex>15104</endIndex>
+        <startLine>314</startLine>
+        <startColumn>13</startColumn>
+        <endLine>314</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>315</line>
+        <index>15157</index>
+        <endIndex>15170</endIndex>
+        <startLine>315</startLine>
+        <startColumn>13</startColumn>
+        <endLine>315</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>316</line>
+        <index>15233</index>
+        <endIndex>15246</endIndex>
+        <startLine>316</startLine>
+        <startColumn>13</startColumn>
+        <endLine>316</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>317</line>
+        <index>15303</index>
+        <endIndex>15316</endIndex>
+        <startLine>317</startLine>
+        <startColumn>13</startColumn>
+        <endLine>317</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>318</line>
+        <index>15368</index>
+        <endIndex>15381</endIndex>
+        <startLine>318</startLine>
+        <startColumn>13</startColumn>
+        <endLine>318</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>319</line>
+        <index>15458</index>
+        <endIndex>15471</endIndex>
+        <startLine>319</startLine>
+        <startColumn>13</startColumn>
+        <endLine>319</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>320</line>
+        <index>15536</index>
+        <endIndex>15549</endIndex>
+        <startLine>320</startLine>
+        <startColumn>13</startColumn>
+        <endLine>320</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>321</line>
+        <index>15601</index>
+        <endIndex>15614</endIndex>
+        <startLine>321</startLine>
+        <startColumn>13</startColumn>
+        <endLine>321</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>322</line>
+        <index>15674</index>
+        <endIndex>15687</endIndex>
+        <startLine>322</startLine>
+        <startColumn>13</startColumn>
+        <endLine>322</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>323</line>
+        <index>15762</index>
+        <endIndex>15775</endIndex>
+        <startLine>323</startLine>
+        <startColumn>13</startColumn>
+        <endLine>323</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropForeignKey must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>324</line>
+        <index>15847</index>
+        <endIndex>15860</endIndex>
+        <startLine>324</startLine>
+        <startColumn>13</startColumn>
+        <endLine>324</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>325</line>
+        <index>15917</index>
+        <endIndex>15925</endIndex>
+        <startLine>325</startLine>
+        <startColumn>13</startColumn>
+        <endLine>325</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>326</line>
+        <index>15978</index>
+        <endIndex>15986</endIndex>
+        <startLine>326</startLine>
+        <startColumn>13</startColumn>
+        <endLine>326</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>327</line>
+        <index>16039</index>
+        <endIndex>16047</endIndex>
+        <startLine>327</startLine>
+        <startColumn>13</startColumn>
+        <endLine>327</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>328</line>
+        <index>16100</index>
+        <endIndex>16108</endIndex>
+        <startLine>328</startLine>
+        <startColumn>13</startColumn>
+        <endLine>328</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>329</line>
+        <index>16160</index>
+        <endIndex>16168</endIndex>
+        <startLine>329</startLine>
+        <startColumn>13</startColumn>
+        <endLine>329</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>330</line>
+        <index>16231</index>
+        <endIndex>16239</endIndex>
+        <startLine>330</startLine>
+        <startColumn>13</startColumn>
+        <endLine>330</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>331</line>
+        <index>16289</index>
+        <endIndex>16297</endIndex>
+        <startLine>331</startLine>
+        <startColumn>13</startColumn>
+        <endLine>331</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>332</line>
+        <index>16353</index>
+        <endIndex>16361</endIndex>
+        <startLine>332</startLine>
+        <startColumn>13</startColumn>
+        <endLine>332</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>333</line>
+        <index>16410</index>
+        <endIndex>16418</endIndex>
+        <startLine>333</startLine>
+        <startColumn>13</startColumn>
+        <endLine>333</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>334</line>
+        <index>16472</index>
+        <endIndex>16480</endIndex>
+        <startLine>334</startLine>
+        <startColumn>13</startColumn>
+        <endLine>334</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>335</line>
+        <index>16530</index>
+        <endIndex>16538</endIndex>
+        <startLine>335</startLine>
+        <startColumn>13</startColumn>
+        <endLine>335</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>336</line>
+        <index>16588</index>
+        <endIndex>16596</endIndex>
+        <startLine>336</startLine>
+        <startColumn>13</startColumn>
+        <endLine>336</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>337</line>
+        <index>16651</index>
+        <endIndex>16659</endIndex>
+        <startLine>337</startLine>
+        <startColumn>13</startColumn>
+        <endLine>337</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>338</line>
+        <index>16710</index>
+        <endIndex>16718</endIndex>
+        <startLine>338</startLine>
+        <startColumn>13</startColumn>
+        <endLine>338</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>339</line>
+        <index>16778</index>
+        <endIndex>16786</endIndex>
+        <startLine>339</startLine>
+        <startColumn>13</startColumn>
+        <endLine>339</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>340</line>
+        <index>16844</index>
+        <endIndex>16852</endIndex>
+        <startLine>340</startLine>
+        <startColumn>13</startColumn>
+        <endLine>340</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>341</line>
+        <index>16905</index>
+        <endIndex>16913</endIndex>
+        <startLine>341</startLine>
+        <startColumn>13</startColumn>
+        <endLine>341</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>342</line>
+        <index>16962</index>
+        <endIndex>16970</endIndex>
+        <startLine>342</startLine>
+        <startColumn>13</startColumn>
+        <endLine>342</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>343</line>
+        <index>17032</index>
+        <endIndex>17040</endIndex>
+        <startLine>343</startLine>
+        <startColumn>13</startColumn>
+        <endLine>343</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>344</line>
+        <index>17097</index>
+        <endIndex>17105</endIndex>
+        <startLine>344</startLine>
+        <startColumn>13</startColumn>
+        <endLine>344</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>345</line>
+        <index>17173</index>
+        <endIndex>17181</endIndex>
+        <startLine>345</startLine>
+        <startColumn>13</startColumn>
+        <endLine>345</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropIndex must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>346</line>
+        <index>17246</index>
+        <endIndex>17254</endIndex>
+        <startLine>346</startLine>
+        <startColumn>13</startColumn>
+        <endLine>346</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>347</line>
+        <index>17307</index>
+        <endIndex>17315</endIndex>
+        <startLine>347</startLine>
+        <startColumn>13</startColumn>
+        <endLine>347</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>348</line>
+        <index>17348</index>
+        <endIndex>17356</endIndex>
+        <startLine>348</startLine>
+        <startColumn>13</startColumn>
+        <endLine>348</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>349</line>
+        <index>17385</index>
+        <endIndex>17393</endIndex>
+        <startLine>349</startLine>
+        <startColumn>13</startColumn>
+        <endLine>349</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>350</line>
+        <index>17433</index>
+        <endIndex>17441</endIndex>
+        <startLine>350</startLine>
+        <startColumn>13</startColumn>
+        <endLine>350</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>351</line>
+        <index>17473</index>
+        <endIndex>17481</endIndex>
+        <startLine>351</startLine>
+        <startColumn>13</startColumn>
+        <endLine>351</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>352</line>
+        <index>17511</index>
+        <endIndex>17519</endIndex>
+        <startLine>352</startLine>
+        <startColumn>13</startColumn>
+        <endLine>352</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>353</line>
+        <index>17548</index>
+        <endIndex>17556</endIndex>
+        <startLine>353</startLine>
+        <startColumn>13</startColumn>
+        <endLine>353</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>354</line>
+        <index>17590</index>
+        <endIndex>17598</endIndex>
+        <startLine>354</startLine>
+        <startColumn>13</startColumn>
+        <endLine>354</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>355</line>
+        <index>17628</index>
+        <endIndex>17636</endIndex>
+        <startLine>355</startLine>
+        <startColumn>13</startColumn>
+        <endLine>355</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>356</line>
+        <index>17673</index>
+        <endIndex>17681</endIndex>
+        <startLine>356</startLine>
+        <startColumn>13</startColumn>
+        <endLine>356</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>357</line>
+        <index>17710</index>
+        <endIndex>17718</endIndex>
+        <startLine>357</startLine>
+        <startColumn>13</startColumn>
+        <endLine>357</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>358</line>
+        <index>17747</index>
+        <endIndex>17755</endIndex>
+        <startLine>358</startLine>
+        <startColumn>13</startColumn>
+        <endLine>358</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>359</line>
+        <index>17793</index>
+        <endIndex>17801</endIndex>
+        <startLine>359</startLine>
+        <startColumn>13</startColumn>
+        <endLine>359</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>360</line>
+        <index>17834</index>
+        <endIndex>17842</endIndex>
+        <startLine>360</startLine>
+        <startColumn>13</startColumn>
+        <endLine>360</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>361</line>
+        <index>17886</index>
+        <endIndex>17894</endIndex>
+        <startLine>361</startLine>
+        <startColumn>13</startColumn>
+        <endLine>361</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>362</line>
+        <index>17935</index>
+        <endIndex>17943</endIndex>
+        <startLine>362</startLine>
+        <startColumn>13</startColumn>
+        <endLine>362</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>363</line>
+        <index>17978</index>
+        <endIndex>17986</endIndex>
+        <startLine>363</startLine>
+        <startColumn>13</startColumn>
+        <endLine>363</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to DropTable must begin with the 'this.', 'base.', 'object.' or 'create.' or 'DbMigration.' prefix to indicate the intended method call. </context>
+        <line>364</line>
+        <index>18019</index>
+        <endIndex>18027</endIndex>
+        <startLine>364</startLine>
+        <startColumn>13</startColumn>
+        <endLine>364</endLine>
+        <endColumn>21</endColumn>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="201708010559157_create.Designer.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2016/05/12 20:26:32.000</styleCop>
+      <settingsFile>2016/04/20 21:35:08.000</settingsFile>
+      <sourceFile>2017/08/01 12:59:16.204</sourceFile>
+      <parser>2016/05/12 20:26:32.000</parser>
+      <StyleCop.CSharp.DocumentationRules>2016/05/12 20:26:32.000</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-221033329</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2016/05/12 20:26:32.000</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2016/05/12 20:26:32.000</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2016/05/12 20:26:32.000</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2016/05/12 20:26:32.000</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>

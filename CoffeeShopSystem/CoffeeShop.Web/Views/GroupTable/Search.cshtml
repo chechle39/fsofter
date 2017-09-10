@@ -1,0 +1,238 @@
+﻿@model IEnumerable<CoffeeShop.Model.ModelEntity.GroupTable>
+
+@{
+    ViewBag.Title = "Searchd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+    <link href="~/Asserts/DataTables-1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Asserts/DuyVM2.css" rel="stylesheet" />
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>DANH SÁCH NHÓM BÀN</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li style="float:right">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content" style="display: block;">
+            <div class="row">
+                <div class="col-sm-8">
+                    <form>
+                        <label class="radio-inline">
+                            <input type="radio" name="option" value="false" checked="checked">Đang quản lý
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="check" name="option" value="true">Đã xóa
+                        </label>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default panel-table" style="margin-top: 20px">
+                <div class="addbtn">
+                    <a href="javascript:;" id="AddButton" title="Thêm mới" class="panel-title btn btn-success"><i class="glyphicon glyphicon-plus"></i></a>
+                </div>
+                <div class="lengthpage">
+                    <label class="control-label float-left">Hiển thị</label>
+                    <div class="float-left">
+                        <select class="form-control" id="lengthpage">
+                            <option value="5">5</option>
+                            <option selected value="10">10</option>
+                            <option value="20">50</option>
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <a style="float: right; margin-top: 5px" data-click="0" href="javascript:;" id="AddvancedButton" title="Chuyển tùy chọn tìm kiếm" class="btn btn-danger"><i class="fa fa-cogs"></i></a>
+                <div class="searchbox">
+
+                    <div id="basesearch" class="searchbox-hiden">
+                        <div class="form-groups">
+                            <div class="col-sm-12">
+                                <input type="text" id="search" title="Tên bàn, phụ thu, số lượng, mô tả ..." class="form-control" placeholder="Từ khóa">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="advancedsearch" class="hidden searchbox-hiden">
+                        <form id="SearchAdvancedForm" action="@Url.Action("SearchAdvanced", "GroupTable")" method="post">
+                            <div class="form-groups">
+                                <div class="col-sm-4">
+                                    <input type="hidden" name="delete" />
+                                    <input type="text" id="NameSearch" name="name" class="form-control" title="Tên nhóm bàn" placeholder="Từ khóa">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="number" id="FromSearch" name="fromSurcharge" class="form-control" title="Phụ thu: từ" placeholder="Min">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="number" id="ToSearch" name="toSurcharge" class="form-control" title="Phụ thu: đến" placeholder="Max">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel-body clearfix">
+                    <table id="Table" class="table table-striped table-responsive jambo_table bulk_action">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên</th>
+                                <th>Phụ thu</th>
+                                <th>Số lượng bàn</th>
+                                <th>Mô tả</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="BodyTable">
+                            @foreach (var item in Model)
+                            {
+                                <tr id="item-@item.ID">
+                                    <td>@item.ID</td>
+                                    <td>@item.Name</td>
+                                    <td>@String.Format("{0:0}", item.Surcharge)</td>
+                                    <td>@item.Tables.Count</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <a href="javascript:;" class="_edit btn btn-info btn-xs" data-id="@item.ID" data-name="@item.Name" data-surcharge="@String.Format("{0:0}", item.Surcharge)" data-description="@item.Description" data-shopid="@item.ShopID" title="Sửa"><i class="fa fa-pencil"></i></a>
+                                        <a href="javascript:;" class="_delete btn btn-danger btn-xs" data-id="@item.ID" data-toggle="modal" data-target="#DeleteModal" title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Add-->
+<div class="modal fade" id="AddModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="AddForm" method="post" action="@Url.Action("Add", "GroupTable")" class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Thêm Nhóm Bàn Mới</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tên:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name" placeholder="Tên">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Phụ thu:</label>
+                        <div class="col-sm-10">
+                            <input type="number" value="0" class="form-control" name="Surcharge" placeholder="Phụ thu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Mô tả:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" name="Description" placeholder="Mô tả"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary savebutton">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="EditModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="EditForm" method="post" action="@Url.Action("Edit", "GroupTable")" class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Chỉnh Sửa Nhóm Bàn</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="ID">
+                    <input type="hidden" name="ShopID">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tên:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name" placeholder="Tên">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Phụ thu:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="Surcharge" placeholder="Phụ thu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Mô tả:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" name="Description" placeholder="Mô tả"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary savebutton">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Delete Modal-->
+<div class="modal fade" id="DeleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="DeleteForm" method="post" action="@Url.Action("Delete", "GroupTable")">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xác Nhận</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center">Bạn chắc chắn xóa?</h5>
+                    <input type="hidden" name="ID" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary savebutton" data-dismiss="modal">Đồng ý</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Recover Modal-->
+<div class="modal fade" id="RecoverModal" role="dialog">
+    <div class="modal-dialog" style="width:700px">
+        <div class="modal-content">
+            <form id="RecoverForm" method="post" action="@Url.Action("Recover", "GroupTable")">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="text-align: center">Xác Nhận</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center">Bạn chắc chắn phục hồi?</h5>
+                    <input type="hidden" name="ID" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary savebutton" data-dismiss="modal">Đồng ý</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section js{
+    <!--js-->
+    <script src="~/Asserts/DataTables-1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="~/Asserts/jquery-validation-1.17.0/jquery.validate.min.js"></script>
+    <script src="~/Scripts/GroupTable.js"></script>
+}

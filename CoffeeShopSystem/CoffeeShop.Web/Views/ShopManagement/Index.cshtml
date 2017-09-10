@@ -1,0 +1,1051 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model List<Shop>
+
+@section css
+    {
+ <style type="text/css">
+
+        /*to display modal at middle*/
+        .modal-dialog {
+            position: absolute;
+            left: 50%;
+            margin-left: -312px;
+            height: 500px;
+            top: 50%;
+            margin-top: -250px;
+        }
+
+        .modal.fade:not(.in).right .modal-dialog {
+            -webkit-transform: translate3d(25%, 0, 0);
+            transform: translate3d(25%, 0, 0);
+        }
+
+        .error {
+            color: red;
+        }
+
+        .right {
+            margin-right: 5px;
+        }
+
+
+        .errorText {
+            align: right;
+        }
+        
+        td span {
+            line-height: 0px;
+        }
+
+     th {
+         color:white;
+     }
+
+     thead {
+         background-color: #2A3F54;
+     }
+
+     .thlinkcolor a{
+         color :white;
+     }
+
+
+        #accTable>tbody>tr:last-child:hover>tr { background-color: white; }
+        #accTable>tbody>tr:last-child:hover>td { background-color: white; }
+    </style>
+}
+
+
+
+ 
+        @if (Request.QueryString["result"] == "AddSuccess")
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"><strong> Thành công!</strong>Thêm cửa hàng thành công.</span>
+            </div>
+        }
+
+        @if (Request.QueryString["result"] == "EditSuccess")
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"><strong>Thành công!</strong>Sửa thông tin cửa hàng thành công.</span>
+            </div>
+        }
+
+        @if (Request.QueryString["result"] == "DeleteSuccess")
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"> <strong>Thành công!</strong>Xóa cửa hàng thành công.</span>
+            </div>
+        }
+        @if (Request.QueryString["result"] == "RecoverSuccess")
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"> <strong>Thành công!</strong>Khôi phục cửa hàng thành công.</span>
+            </div>
+        }
+        @if (Request.QueryString["result"] == "AddFailed")
+        {
+            <div id="success-alert" class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"><strong> Thất bại!</strong>Thêm cửa hàng không thành công.</span>
+            </div>
+        }
+        @if (Request.QueryString["result"] == "EditFailed")
+        {
+            <div id="success-alert" class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"><strong> Thất bại!</strong>Cập nhật thông tin cửa hàng không thành công.</span>
+            </div>
+        }
+        @if (Request.QueryString["result"] == "DeleteFailed")
+        {
+            <div id="success-alert" class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"><strong> Thất bại!</strong>Xóa cửa hàng không thành công.</span>
+            </div>
+        }
+        @if (Request.QueryString["result"] == "RecoverFailed")
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <span style="color:white;"> <strong>Thất bại!</strong>Khôi phục cửa hàng không thành công.</span>
+            </div>
+        }
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                     @*pageSize here*@
+                </div>
+                <div class="col-sm-8">
+                    <form>
+
+                        <label class="radio-inline">
+                            <input type="radio" class="optradio" name="optradio" value="Managing" @if (ViewBag.Option == "Managing") { <text> checked="checked" </text>  }>Đang quản lý
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" class="optradio" name="optradio" value="Deleted" @if (ViewBag.Option == "Deleted") { <text> checked="checked" </text>   }>Đã xóa
+                        </label>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-info btn-sm" id="btnCreateNew" data-target="#addModal" data-toggle="modal">
+
+                        <icon class="glyphicon glyphicon-plus"> </icon>
+                        Tạo mới
+
+
+
+                    </button>
+                </div>
+
+
+
+
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <form name="searchForm" id="searchForm" action="" method="get" novalidate="novalidate">
+                                <button class="btn btn-info btn-sm" type="submit" style="float:right;">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button><div style="overflow: hidden;"><input id="Filter" name="Filter" type="text" class="form-control input-sm valid" placeholder="Nhập tên hoặc mô tả cần tìm..." aria-invalid="false"></div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+            <div> <br /></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="tablecontent">
+                        <table id="accTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="thlinkcolor">
+                                        <a href="@Url.Action("Index", new { sort = "ID", type = ViewBag.IDSortType, curPage = ViewBag.curPage , option = ViewBag.Option })">
+                                            ID
+                                            @if (ViewBag.IDSortType == "desc")
+                                            {<span class="fa fa-caret-square-o-up"></span>}
+                                            else if (ViewBag.IDSortType == "asc")
+                                            {<span class="fa fa-caret-square-o-down"></span>}
+                                            else
+                                            {<span class="fa fa-sort"></span>}
+                                        </a>
+                                    </th>
+                                    <th class="thlinkcolor">
+                                        <a href="@Url.Action("Index", new { sort = "Name", type = ViewBag.NameSortType, curPage = ViewBag.curPage, option = ViewBag.Option })">
+                                            Tên cửa hàng
+                                            @if (ViewBag.NameSortType == "desc")
+                                            {<span class="fa fa-caret-square-o-up"></span>}
+                                            else if (ViewBag.NameSortType == "asc")
+                                            {<span class="fa fa-caret-square-o-down"></span>}
+                                            else
+                                            {<span class="fa fa-sort"></span>}
+                                        </a>
+                                    </th>
+                                    <th class="thlinkcolor">
+                                        <a href="@Url.Action("Index", new { sort = "Address", type=ViewBag.AddressSortType , curPage = ViewBag.curPage , option = ViewBag.Option })">
+                                            Địa chỉ
+                                            @if (ViewBag.AddressSortType == "desc")
+                                            {<span class="fa fa-caret-square-o-up"></span>}
+                                            else if (ViewBag.AddressSortType == "asc")
+                                            {<span class="fa fa-caret-square-o-down"></span>}
+                                            else
+                                            {<span class="fa fa-sort"></span>}
+                                        </a>
+                                    </th>
+
+                                    <th class="thlinkcolor">
+                                        <a href="@Url.Action("Index", new { sort = "Description", type = ViewBag.DescriptionSortType, curPage = ViewBag.curPage, option = ViewBag.Option })">
+                                            Mô tả
+                                            @if (ViewBag.DescriptionSortType == "desc")
+                                            {<span class="fa fa-caret-square-o-up"></span>}
+                                            else if (ViewBag.DescriptionSortType == "asc")
+                                            {<span class="fa fa-caret-square-o-down"></span>}
+                                            else
+                                            {<span class="fa fa-sort"></span>}
+                                        </a>
+                                    </th>
+                                    <th> &nbsp;</th>
+                                </tr>
+
+                            </thead>
+                            <tbody id="tbodyList">
+                                @foreach (Shop s in @Model)
+                                {
+
+
+                                    <tr>
+
+                                        <td>@s.ID</td>
+                                        <td>@s.Name</td>
+                                        <td>@s.DetailAddress</td>
+                                        <td>@s.Description
+                                        <td>
+                                            <button href='javascript:;' class="btn btn-success btn_Edit" type="submit" data-toggle="modal" data-target="#editModal_@s.ID" data-id="@s.ID">
+                                                <icon class="glyphicon glyphicon-pencil">
+                                                </icon>
+                                                Sửa
+                                            </button>
+
+                                            @if (s.IsDelete == false)
+                                            {
+                                                <button class="btn btn-danger btn_Delete" type="submit" data-toggle="modal" data-target="#deleteModal" data-id="@s.ID">
+                                                    <icon class="glyphicon glyphicon-remove"></icon> Xóa
+                                                </button>
+                                        }
+                                            else
+                                            {
+                                                <button class="btn btn-danger btn_Recover" type="submit" data-toggle="modal" data-target="#recoverModal" data-id="@s.ID">
+                                                    <icon class="glyphicon glyphicon-wrench"></icon> Khôi phục
+                                                </button>
+                                            }
+                                               
+                                        </td>
+                                    </tr>
+
+
+
+                                }
+
+                                <tr>
+                                    <td colspan="5">
+                                        @*pagination section , in tbodyList div for ajax searching (search require update number of page)*@
+                                        <nav>
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <ul class="pagination">
+                                                    <li @if (@ViewBag.curPage == 1) { <text> class="disabled" </text>          }>
+                                                        @if (@ViewBag.curPage != 1)
+                                                        {
+                                                            <a href="?sort=@ViewBag.Sort&type=@ViewBag.MyStyle&curPage=@ViewBag.PrevPage&option=@ViewBag.Option" aria-label="Previous">
+                                                                <span aria-hidden="true">
+                                                                    &laquo;
+                                                                </span>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" aria-label="Previous">
+                                                                <span aria-hidden="true">
+                                                                    &laquo;
+                                                                </span>
+                                                            </a>
+                                                        }
+                                                    </li>
+
+                                                    @for (int i = 1; i <= ViewBag.Pages; i++)
+                                                    {
+
+                                                        <li @if (i == ViewBag.curPage) { <text> class="active" </text>          }>
+                                                            <a href="?sort=@ViewBag.Sort&type=@ViewBag.MyStyle&curPage=@i&option=@ViewBag.Option">
+                                                                @i
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                    <li @if (@ViewBag.curPage == ViewBag.Pages) { <text> class="disabled" </text>      }>
+                                                        @if (ViewBag.curPage != ViewBag.Pages)
+                                                        {
+                                                            <a href="?sort=@ViewBag.Sort&type=@ViewBag.MyStyle&curPage=@ViewBag.NextPage&option=@ViewBag.Option" aria-label="Next">
+                                                                <span aria-hidden="true">
+                                                                    »
+                                                                </span>
+
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" aria-label="Next">
+                                                                <span aria-hidden="true">
+                                                                    »
+                                                                </span>
+
+                                                            </a>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="allmodalhere">
+            <div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Thêm Cửa Hàng Mới</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divProName">@Html.Action("PartialViewAddShop", "ShopManagement")</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                            <button id="btn_ConfirmAdd" type="button" class="btn btn-primary">Thêm Mới</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" id="hiddenfield" value="" />
+
+
+            @foreach (Shop s in @Model)
+            {
+                <div id="editModal_@s.ID" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Sửa Cửa Hàng</h4>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                                <div id="divProName">  @Html.Action("PartialViewEditShop", "ShopManagement", new { id = @s.ID })</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary btn_ConfirmEdit" data-id="@s.ID">Lưu chỉnh sửa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+
+            <div id="deleteModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                   
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Xác nhận xóa cửa hàng</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc muốn xóa cửa hàng này?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default" data-dismiss="modal">Chưa</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_ConfirmDelete">Xóa</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <div id="recoverModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Xác nhận khôi phục cửa hàng</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc muốn khôi phục cửa hàng này?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default" data-dismiss="modal">Chưa</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_ConfirmRecover">Khôi phục</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+@section js
+    {
+    
+<script src="~/Asserts/jquery-validation-1.17.0/jquery.validate.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+
+
+
+            jQuery.validator.addMethod("isUniqueName", function (value, element) {
+                return this.optional(element) || (isUniqueName());
+            }, "Tên cửa hàng đã tồn tại trong hệ thống");
+
+            //dang focus return true
+            function isUniqueName()
+            {
+                
+                var url = '@Url.Action("IsUniqueName", "ShopManagement")';
+                var ret = false;
+                
+                var Id = $('#hiddenfield').val();
+
+                if (Id == 0) {
+                    console.log($("#addShopForm [name='Name']").is(":focus"));
+                    
+                    if ($("#addShopForm [name='Name']").is(":focus"))
+                    {
+                        return true;
+                    }
+                    var input = $("#addShopForm [name='Name']").val();
+                  //  alert(input);
+                }
+                else {
+                   
+
+                    frmEdit = "#editShopForm_" + Id + " [name='Name']";
+                    console.log($(frmEdit).is(":focus"));
+                    //alert(frmEdit);
+                    if ($(frmEdit).is(":focus")) {
+                        return true;
+                    }
+                    var input = $(frmEdit).val();
+                  //  alert(input);
+                }
+                
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: { 'input': input, 'shopID': Id },
+                    async: false,
+                    success: function (data) {
+                        ret = data;
+                        console.log(data);
+                    }
+                });
+                if (ret == "True") {
+                    return true;
+                }
+                if (ret == "False") {
+                    return false;
+                }
+
+                
+                
+
+            }
+
+
+
+
+            $("#btn_ConfirmAdd").on('click', function () {
+
+                $("#addShopForm").submit();
+
+
+            });
+
+            $(".btn_ConfirmEdit").on('click', function () {
+
+                var Id = $(this).data('id');
+
+                var form = "#editShopForm_" + Id;
+                $(form).submit();
+
+
+            });
+
+            $("#tbodyList").on('click', ".btn_ConfirmEdit", function () {
+
+
+                
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+                var form = "#editShopForm_" + Id;
+                $(form).validate({
+
+                    rules: {
+                        Name: {
+                            required: true,
+                            isUniqueName : true
+                        },
+
+
+                        DetailAddress: {
+                            required: true
+                        },
+                        WardID: {
+                            required: true
+                        }
+                    },
+
+                    messages: {
+
+                        Name: {
+                            required: "Chưa nhập tên cửa hàng.",
+                        },
+
+
+                        DetailAddress: {
+                            required: "Chưa nhập địa chỉ cửa hàng."
+                        },
+                        WardID: {
+                            required: "Chưa nhập dữ liệu phường."
+                        }
+                    },
+
+
+                    errorElement: 'div',
+                    errorLabelContainer: ".errorText",
+
+
+
+                    success: function (form) {
+                        //  form.submit();
+                    }
+
+                });
+                $(form).submit();
+
+
+            });
+
+
+
+            $(".optradio").on("click", function () {
+                var option = $(this).val();
+                location.href = "/ShopManagement/Index?option=" + option;
+            });
+
+
+            $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+
+
+            $('input[type=checkbox]').each(function () {
+                $(".chkIsDelete").on('click', function () {
+                    $(this).val($(this).prop('checked'));
+
+
+                });
+
+                $("#tbodyList").on('click', '.chkIsDelete', function () {
+                    $(this).val($(this).prop('checked'));
+
+
+                });
+
+            });
+
+
+
+
+
+
+            $('#cboCity_Add').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateDistrictList(1);
+                UpdateWardList(1);
+
+            });
+
+            $('#cboDistrict_Add').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateWardList(1);
+            });
+
+
+            $('.cboDistrict_Edit').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                var Id = $(this).data("id");
+
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateWardList(2, null, this, Id);
+            });
+
+
+            $('#tbodyList').on('change', '.cboDistrict_Edit', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                var Id = $(this).data("id");
+
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateWardList(2, null, this, Id);
+            });
+
+
+            $('.cboCity_Edit').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                var Id = $(this).data("id");
+
+
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateDistrictList(2, this, Id);
+                UpdateWardList(2, this, null, Id);
+
+            });
+
+
+            $('#tbodyList').on('change', '.cboCity_Edit', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                var Id = $(this).data("id");
+
+
+                // truyền vô 1 : Add , truyền vô 2 : Edit
+                UpdateDistrictList(2, this, Id);
+                UpdateWardList(2, this, null, Id);
+
+            });
+
+
+
+
+
+
+
+
+            $('form').each(function () {
+                $(this).validate({
+
+                    rules: {
+                        Name: {
+                            required: true,
+                            isUniqueName: true
+                        },
+
+
+                        DetailAddress: {
+                            required: true
+                        },
+
+                        WardID: {
+                            required: true
+                        }
+                    },
+
+                    messages: {
+
+                        Name: {
+                            required: "Chưa nhập tên cửa hàng.",
+                        },
+
+
+                        DetailAddress: {
+                            required: "Chưa nhập địa chỉ cửa hàng."
+                        },
+
+                        WardID: {
+                            required: "Chưa nhập dữ liệu phường."
+                        }
+                    },
+
+
+                    errorElement: 'div',
+                    errorLabelContainer: ".errorText",
+
+
+
+                    success: function (form) {
+                        // form.submit();
+                    }
+
+                });
+
+
+
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+            function UpdateDistrictList(mode, cboCity, id) {
+                //add
+                if (mode == 1) {
+                    var cityID = $('#cboCity_Add').val();
+                }
+                //edit
+                if (mode == 2) {
+                    var cityID = cboCity.value;
+                }
+                url = "/AccountManagement/UpdateDistrictList?cityID=" + cityID;
+
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    timeout: 30 * 1000,
+
+                    async: false
+
+                })
+
+
+
+             .done(function (data) {
+
+                 if (mode == 1) {
+                     $('#cboDistrict_Add').html("");
+                 }
+
+                 if (mode == 2) {
+                     var cboDistrict = "#cboDistrict_Edit_" + id;
+                     $(cboDistrict).html("");
+                 }
+
+
+
+                 $.each(data.Result, function (i, district) {
+
+                     var html =
+                         '<option value="' + district.ID + '">' + district.Name + '</option>';
+
+                     if (mode == 1) {
+                         $('#cboDistrict_Add').append(html);
+                     }
+
+                     if (mode == 2) {
+                         var cboDistrict = "#cboDistrict_Edit_" + id;
+                         $(cboDistrict).append(html);
+                     }
+                 });
+
+
+             })
+                .fail(function (jqXHR, textStatus, error) {
+
+
+                    if (mode == 1) {
+                        $('#cboDistrict_Add').html("");
+                    }
+
+                    if (mode == 2) {
+                        var cboDistrict = "#cboDistrict_Edit_" + id;
+                        $(cboDistrict).html("");
+                    }
+
+                    alert("Lỗi ajax ở combobox Quận");
+
+
+                });
+            }
+
+
+
+            function UpdateWardList(mode, cboCity, cboDistrict, id) {
+
+                if (mode == 1) {
+                    var districtID = $('#cboDistrict_Add').val();
+                }
+
+                if (mode == 2) {
+                    if (cboDistrict != null) {
+                        var districtID = cboDistrict.value;
+                    }
+                        // nếu cboDistrict.value = rỗng thì lấy mã quận đầu tiên của city vừa chọn
+                    else {
+                        var cboDistrict = '#cboDistrict_Edit_' + id;
+                        var a = $(cboDistrict).val();
+                        var districtID = a;
+                    }
+
+                }
+                url = "/AccountManagement/UpdateWardList?districtID=" + districtID;
+
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    timeout: 30 * 1000,
+                    async: false
+
+                })
+
+
+
+             .done(function (data) {
+
+                 if (mode == 1) {
+                     $('#cboWard_Add').html("");
+                 }
+                 if (mode == 2) {
+                     var cboWard = '#cboWard_Edit_' + id;
+                     $(cboWard).html("");
+                 }
+                 $.each(data.Result, function (i, ward) {
+                     var html =
+                         '<option value="' + ward.ID + '">' + ward.Name + '</option>';
+
+                     if (mode == 1) {
+                         $('#cboWard_Add').append(html);
+                     }
+
+                     if (mode == 2) {
+                         var cboWard = '#cboWard_Edit_' + id;
+                         $(cboWard).append(html);
+                     }
+                 });
+
+             })
+                .fail(function (jqXHR, textStatus, error) {
+                    if (mode == 1) {
+                        $('#cboWard_Add').html("");
+                    }
+                    if (mode == 2) {
+                        var cboWard = '#cboWard_Edit_' + id;
+                        $(cboWard).html("");
+                    }
+                    alert("Lỗi ajax ở comboBox phường");
+
+
+                });
+            }
+
+
+
+
+            $('#btnCreateNew').on('click', function () {
+                $('#hiddenfield').val(0);
+             });
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+            $(".btn_Edit").click(function () {
+
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+
+
+
+
+            });
+
+            $(".btn_Delete").click(function () {
+
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+
+            });
+
+
+            $("#tbodyList").on('click', '.btn_Delete', function () {
+
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+
+            });
+
+            $("#btn_ConfirmDelete").click(function () {
+                var Id = $("#hiddenfield").val();
+                location.href = "/ShopManagement/Delete?id=" + Id;
+            });
+
+
+
+
+            $(".btn_Recover").click(function () {
+
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+
+            });
+
+
+            $("#tbodyList").on('click', '.btn_Recover', function () {
+
+                var Id = $(this).data('id');
+                $("#hiddenfield").val(Id);
+
+
+            });
+
+
+            $("#btn_ConfirmRecover").click(function () {
+                var Id = $("#hiddenfield").val();
+                location.href = "/ShopManagement/Recover?id=" + Id;
+            });
+
+
+
+
+            $("#tbodyList").on("click", ".paginationAjax", function () {
+
+                var filter = $(this).data("filter");
+                var sort = $(this).data("sort");
+                var type = $(this).data("type");
+                var curPage = $(this).data("curpage");
+                var option = $(this).data("option");
+
+                var url = "/ShopManagement/SearchByNameOrDescription?filter=" + filter + "&sort=" + sort + "&type=" + type + "&curPage=" + curPage + "&option=" + option;
+
+                $.ajax({
+                    url: url,
+                    dataType: 'html',
+                    timeout: 30 * 1000
+
+                })
+
+
+
+              .done(function (data) {
+
+                  $('#tbodyList').html("");
+                  $('#tbodyList').html(data);
+              })
+
+            });
+
+
+
+
+            $("#searchForm").submit(function (e) {
+                e.preventDefault();
+                var frm = $("#searchForm");
+                var filter = $("#Filter").val();
+                url = "/ShopManagement/SearchByNameOrDescription?filter=" + filter + "&option=@ViewBag.Option";
+
+                $.ajax({
+                    url: url,
+                    dataType: 'html',
+                    timeout: 30 * 1000,
+
+                })
+
+
+
+              .done(function (data) {
+
+                  $('#tbodyList').html("");
+                  $('#tbodyList').html(data);
+
+
+
+              })
+        .fail(function (jqXHR, textStatus, error) {
+            $('#tbodyList').html("");
+            var html = '<tr><td colspan="8" align="center">Không có dữ liệu cho kết quả vừa tìm.</td></tr>';
+            $('#tbodyList').append(html);
+
+
+        });
+            });
+
+
+        });
+
+
+    </script>
+}
+
+
+
+

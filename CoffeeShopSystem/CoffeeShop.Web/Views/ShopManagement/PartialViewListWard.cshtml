@@ -1,0 +1,13 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model List<Ward>
+
+
+@if (@Model != null)
+{
+
+
+   foreach (Ward w in @Model)
+    {
+    <option value="@w.ID" @if (ViewBag.WardID == w.ID) {<text>selected="selected"</text> }>@w.Name</option>
+    }
+}

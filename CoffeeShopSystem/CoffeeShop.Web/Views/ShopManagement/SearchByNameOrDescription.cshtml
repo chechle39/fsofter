@@ -1,0 +1,154 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model List<Shop>
+
+
+
+
+
+
+@if (Model != null)
+{
+    foreach (Shop s in @Model)
+    {
+        <tr>
+            <td>
+                <div id="editModal_@s.ID" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+                    <div class="modal-dialog" role="document">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Sửa Cửa Hàng</h4>
+
+                            </div>
+                            <div class="modal-body">
+                                <div id="divProName">
+                                    <script type="text/javascript">
+                                        // don't remove <script> tag
+                                    </script>
+                                    @Html.Action("PartialViewEditShop", "ShopManagement", new { id = @s.ID })
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button><button type="button" class="btn btn-primary btn_ConfirmEdit" data-id="@s.ID">
+                                    Lưu chỉnh sửa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @s.ID
+            </td>
+
+
+            <td> @s.Name</td>
+            <td>@s.DetailAddress</td>
+            <td>@s.Description</td>
+
+            <td>
+                <button href='javascript:;' class="btn btn-success btnEdit" type="submit" id="btnEdit" data-id="@s.ID" data-toggle="modal" data-target="#editModal_@s.ID">
+                   <icon class="glyphicon glyphicon-pencil"></icon>Sửa
+                </button> &nbsp;
+                
+                @if (s.IsDelete == false)
+                {
+                    <button class="btn btn-danger btn_Delete" type="submit" data-toggle="modal" data-target="#deleteModal" data-id="@s.ID">
+                        <icon class="glyphicon glyphicon-remove"></icon> Xóa
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger btn_Recover" type="submit" data-toggle="modal" data-target="#recoverModal" data-id="@s.ID">
+                        <icon class="glyphicon glyphicon-wrench"></icon> Khôi phục
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+}
+
+
+@if (Model != null)
+{
+    <tr>
+        <td colspan="5">
+            @*pagination section , in tbodyList div for ajax searching (search require update number of page)*@
+            <nav>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <ul class="pagination">
+                        <li @if (@ViewBag.curPage == 1) { <text> class="disabled" </text>}>
+
+                            @if (@ViewBag.curPage != 1)
+                            {
+                                <a href="#" class="paginationAjax" data-filter="@ViewBag.Filter" data-sort="@ViewBag.Sort" data-type="@ViewBag.MyStyle" data-curpage="@ViewBag.PrevPage" data-option="@ViewBag.Option" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        &laquo;
+                                    </span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        &laquo;
+                                    </span>
+                                </a>
+                            }
+                        </li>
+
+                        @for (int i = 1; i <= ViewBag.Pages; i++)
+                        {
+
+                            <li @if (i == ViewBag.curPage) { <text> class="active" </text>         }>
+                                <a href="#" data-filter="@ViewBag.Filter" data-sort="@ViewBag.Sort" data-type="@ViewBag.MyStyle" data-curpage="@i" data-option="@ViewBag.Option" class="paginationAjax">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li @if (@ViewBag.curPage == ViewBag.Pages) { <text> class="disabled" </text>     }>
+                            @if (ViewBag.curPage != ViewBag.Pages)
+                            {
+                                <a href="#" class="paginationAjax" data-filter="@ViewBag.Filter" data-sort="@ViewBag.Sort" data-type="@ViewBag.MyStyle" data-curpage="@ViewBag.NextPage" data-option="@ViewBag.Option" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        »
+                                    </span>
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        »
+                                    </span>
+
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            @*end pagination section*@
+        </td>
+    </tr>
+}
+
+else
+{
+    <tr><td colspan="5">Không có dữ liệu cho kết quả vừa tìm</td></tr>
+}
+
+
+
+
+
+
+
+

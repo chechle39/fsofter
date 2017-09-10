@@ -1,0 +1,140 @@
+@media screen and (max-width: 575px) {
+	#content-menu > div, #txtKeyword, #infoModal, #infoModal div.form-group {
+		width: 100% !important;
+	}
+}
+
+html, body {
+	margin: auto;
+}
+
+body {
+	font-family: Arial, Helvetica, Verdana, Sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #fff;
+}
+
+label {
+	padding: 0 5px 0px;
+}
+
+.form-control {
+	font-size: inherit;
+}
+
+.form-group {
+	padding: 0 5px;
+	overflow: auto;
+}
+
+#content-wrapper {
+	margin: auto;
+	padding: 5px;
+}
+
+input.form-control, select.form-control, button.form-control {
+	height: 30px !important;
+	padding: 5px;
+}
+
+#content-header {
+	padding: 5px;
+	clear: both;
+}
+
+#content-header > div {
+	padding: 0;
+}
+
+#content-top {
+	height: 30px;
+	margin-top: 10px;
+	border-bottom: 1px solid #bbb;
+}
+
+#content-top .headerHeading {
+	float: left;
+	margin-right: 10px;
+}
+
+#content-top .headerHeading h4 {
+	margin: 0;
+	padding: 0;
+}
+
+#content-top .headerAddLabel {
+	padding-top: 3px;
+}
+
+#content-menu {
+	padding-top: 10px !important;
+	clear: both;
+	background-color: #f9f9f9;
+	overflow: auto;
+}
+
+#content-menu > div {
+	float: left;
+	padding: 5px 10px 0px 0px;
+}
+
+#content-menu input[type=radio] {
+	margin: 0;
+}
+
+#content-menu .menuSort > div {
+	float: left;
+}
+
+#advanceSearchBox {
+	width: 100%;
+	clear: both;
+	overflow: auto;
+	background-color: #f9f9f9;
+}
+
+#advanceSearchBox div.form-group {
+	float: left;
+}
+
+#content-body {
+	margin-top: 5px;
+	clear: both;
+}
+
+#content-body ul {
+	border-bottom: 1px solid #bbb;
+}
+
+#content-body ul li {
+	height: 40px;
+	float: left;
+}
+
+#content-body ul li.active {
+	font-weight: bold;
+	background-color: #ddd;
+	border-radius: 5px 5px 0px 0px;
+}
+
+#content-body ul li a:hover {
+	font-weight: bold;
+	color: #0275d8;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+.leftPagination {
+	float: left;
+	clear: both;
+}
+
+.hidden {
+	display: none;
+}
+
+.clearfix {
+	overflow: auto;
+	clear: both;
+}

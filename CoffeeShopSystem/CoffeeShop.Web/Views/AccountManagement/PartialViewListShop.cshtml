@@ -1,0 +1,18 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+
+@model List<Shop>
+    @if (Model != null)
+    {
+    <select class="form-control">
+    @foreach (Shop s in @Model)
+    {
+        <option value="@s.ID">@s.Name</option>
+
+
+    }
+   </select>
+    }
+    else
+    {
+        <select class="form-control"><option value="">Không có dữ liệu shop được tìm thấy</option></select>
+    }

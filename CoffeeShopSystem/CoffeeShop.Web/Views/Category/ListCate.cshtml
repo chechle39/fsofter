@@ -1,0 +1,11 @@
+﻿@model IEnumerable<CoffeeShop.Model.ModelEntity.ProductCategory>
+@{
+    ViewBag.Title = "ListCate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach(var item in Model)
+{
+    <option value="@item.ID">@item.Name</option>
+}
+

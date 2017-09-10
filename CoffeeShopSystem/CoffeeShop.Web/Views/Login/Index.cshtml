@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <meta charset="utf-8" />
+    <link href="~/Asserts/CSS/style.css" rel="stylesheet" />
+    <script src="~/Asserts/JS/Script.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <form name="login-form" class="login-form" action="Search.html" method="post">
+            <div class="header">
+                <h1>Coffee Shop System</h1>
+                <span>Đăng nhập hệ thống</span>
+            </div>
+            <div class="content">
+                <span id="error" style="font-style:italic;color:red; font-size:13px;"></span>
+                <input name="username" type="text" class="input username" id="username" onfocus="this.value=&#39;&#39;" placeholder="Tài khoản">
+                <input name="password" type="password" class="input password" id="password" onfocus="this.value=&#39;&#39;" placeholder="Mật khẩu"><!--END PASSWORD-->
+                <div class="clearfix"></div>
+                <br>
+                <span style="font-size:13px;"><a href="ForgetPassword.html" onclick="forgetpass()"><i><u>Quên mật khẩu?</u></i></a></span>
+                <input type="submit" name="submit" value="Đăng Nhập" class="button">
+            </div>
+
+        </form>
+        <span></span>
+    </div>
+</body>
+</html>

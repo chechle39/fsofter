@@ -1,0 +1,453 @@
+﻿@model IEnumerable<CoffeeShop.Model.ModelEntity.ProductCategory>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Quản Lý Danh Mục Sản Phẩm</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li style="float:right">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content" style="display: block;">
+            <div class="row">
+                <div class="col-sm-4" id="pager">
+                    <label>Hiện</label>
+                    <select>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+
+                    <label>Trên</label>
+                </div>
+                <div class="col-sm-4">
+                    <form>
+                        @*<label class="radio-inline">
+                                <input type="radio" name="filter" value="showAll"  id="showAll">Hiển thị tất cả
+                            </label>*@
+                        <label class="radio-inline">
+                            <input type="radio" name="filter" id="false" checked="checked">Đang quản lý
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="filter" value="IsDelete" id="IsDelete">Đã xóa
+                        </label>
+                    </form>
+                </div>
+
+                @*<div class="col-sm-4">
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" style="float:right" placeholder="Search for name...">
+                    </div>*@
+            </div>
+            <div class="panel panel-default panel-table" style="margin-top: 20px">
+                <div class="panel-heading clearfix">
+                    <div class="col-sm-8">
+                        <a href="javascript:;" id="btnAddNew" data-toggle="modal" data-target="#infoModal" title="Thêm mới" class="panel-title"><i class="glyphicon glyphicon-plus"></i></a>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Từ khóa...">
+                    </div>
+                </div>
+
+                <div class="panel-body clearfix">
+                    <table class="table table-striped table-responsive jambo_table bulk_action" id="myTable">
+                        <thead>
+                            <tr class="headings">
+                                <th>
+                                    <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                </th>
+
+                                <th class="column-title">Tên</th>
+                                <th class="column-title">Mô Tả</th>
+
+                                <th class="column-title no-link last">
+                                    <span class="nobr">Hành Động</span>
+                                </th>
+                                <th></th>
+                                <th class="bulk-actions" colspan="7" style="">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="even pointer">
+                                    <td class="a-center ">
+                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                    </td>
+                                    <td class="ID" style="display:none;">@item.ID</td>
+                                    <td class="Name">@item.Name</td>
+                                    <td class="Description">@item.Description</td>
+                                    <td class="isDelete" style="display:none;">@item.IsDelete</td>
+
+                                    @*<td class="a-right a-right ">$7.45</td>*@
+                                    <td>
+                                        @*<a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>*@
+                                        <a href="#" class="btn btn-info btnEdit btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a href="javascript:void(0)" id="@item.ID" class="btn btn-danger delete-prompt btn-xs"><i class="fa fa-trash-o"></i>Delete</a>
+                                        <a href="javascript:void(0)" id="@item.ID" class="btn btn-info btnKhoiPhuc btn-xs"><i class="fa fa-pencil"></i> Restore </a>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col col-xs-4">
+                            Page 1 of 5
+                        </div>
+                        <div class="col col-xs-8">
+                            <ul class="pagination hidden-xs pull-right">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                            </ul>
+                            <ul class="pagination visible-xs pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*create popup*@
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4 id="ModalTitle" style="border-color:gainsboro; text-align:center">LOẠI SẢN PHẨM</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            <div class="form-group">
+                                <label for="name">Tên SP:</label>
+                                <input type="text" name="Name" class="form-control" id="txtName" placeholder="nhap ten.." />
+                                <label for="name" id="lblError" style="color : red ; display:none"></label>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="Des">Mô tả:</label>
+                                <input type="text" class="form-control" id="txtDes" placeholder="nhap mo ta.." />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    @*<a href="#" class="btn btn-block btn-primary" id="SaveStudentRecord" data-dismiss="modal" >Lưu</a>*@
+                                    <input type="submit" class="btn btn-block btn-primary" id="SaveStudentRecord" value="Save" />
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#" class="btn btn-block btn-info" data-dismiss="modal">Cancel</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*/create popup*@
+
+    <!-- Bootstrap modal popup Delete-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert alert-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Infromation Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="success-message">Are you sure you wish to delete this record ? </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success delete-confirm">Ok</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of the boostrap modal popup -->
+    @*Popup for view restore*@
+    <!--View popup Restore-->
+    <div class="modal fade" id="frmRestore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert alert-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Infromation Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="success-message">Bạn có chắc muốn khôi phục lại sản phẩm này không ? </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btnRestore ">Ok</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End view Restore-->
+    @*/Create A PopUp Modal For DeleteConfirmation*@
+
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('tr').show();
+        $('tr:not(:has(th)[4]):not(:contains("False"))').hide();
+        $('.btnKhoiPhuc').hide();
+        $(".headings").show();
+
+        $('#MyModal').on('hide.bs.modal', function () {
+            $('#lblError').css("display", "none");
+        });
+
+        //event click Thêm mới
+        let check = false;//if check =false will call Insert , Else call Update
+        let idUpdate;
+        let rowTemp;
+        $("#btnAddNew").click(function () {
+            check = true;
+            $("#form")[0].reset();
+            $("#MyModal").modal();
+        });
+
+        //envent Edit
+        $(".btnEdit").click(function () {
+            $("#form")[0].reset();
+            $("#MyModal").modal();
+            var row = $(this).closest('tr');
+            rowTemp = row;
+            idUpdate = row.find('.ID').html();
+            var name = row.find(".Name").html();
+            var desciption = row.find(".Description").html();
+            //show data len textbox
+            $("#txtName").val(name);
+            $("#txtDes").val(desciption);
+
+
+        });
+
+        //
+        //envent restore
+        $('.btnKhoiPhuc').click(function () {
+            productID = $(this).attr('id');
+            selectedRow = $(this).closest('tr');
+            $('#frmRestore').modal();
+        });
+        //xu ly restore
+        $('.btnRestore').click(function () {
+            $.ajax({
+                url: '@Url.Action("Restore","Category")',
+                data: { 'id': productID },
+                type: "get",
+                success: function (data) {
+                    if (data)
+                    {
+                        location.reload();
+                    }
+                    //selectedRow.remove();
+                    
+                }
+
+            });
+            location.reload();
+            alert("Success!!");
+            $('#frmRestore').modal("hide");
+        });
+        //event click delete
+
+        var idCate;
+        let selectedRow;
+        $('.delete-prompt').click(function () {
+            idCate = $(this).attr('id');
+            selectedRow = $(this).closest('tr');
+            $('#myModal').modal();
+        });
+
+        //
+        $('.delete-confirm').click(function () {
+            if (idCate != '') {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Category")',
+                    data: { 'ID': idCate },
+                    type: 'get',
+                    success: function (data) {
+                        if (data) {
+                            //sử dụng lại popup modal để hiển thị thông báo thành công.
+                            //Thay đổi màu nền
+                            if ($('.modal-header').hasClass('alert-danger')) {
+                                $('.modal-header').removeClass('alert-danger').addClass('alert-success');
+                                //hide ok button as it is not necessary
+                                $('.delete-confirm').css('display', 'none');
+                            }
+                            $('.success-message').html('Xóa thành công!!');
+                            location.reload();
+                            selectedRow.remove();
+                        }
+                    }, error: function (err) {
+                        if (!$('.modal-header').hasClass('alert-danger')) {
+                            $('.modal-header').removeClass('alert-success').addClass('alert-danger');
+                            $('.delete-confirm').css('display', 'none');
+                        }
+                        $('.success-message').html(err.statusText);
+                    }
+                });
+            }
+        });
+
+        //function to reset bootstrap modal popups
+        $("#myModal").on("hidden.bs.modal", function () {
+            $(".modal-header").removeClass(' ').addClass('alert-danger');
+            $('.delete-confirm').css('display', 'inline-block');
+            $('.success-message').html('').html('Are you sure you wish to delete this record ?');
+        });
+
+
+        //xu ly insert
+        let checkInsertProduct = false;
+        let isDelete = false;
+        $('#SaveStudentRecord').click(function () {
+            if (validateForm()) {
+                if (check == true) {
+
+                    checkInsertProduct = true;
+                    var name = $("#txtName").val();
+                    var desciption = $("#txtDes").val();
+
+                    var cate = new Object();
+
+                    cate.Name = name;
+                    cate.Description = desciption;
+                    cate.IsDelete = isDelete;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Create","Category")',
+                        data: JSON.stringify(cate),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function () {
+                        }
+
+                    });
+
+                    $('#myTable tbody').append('<tr><td class="a-center"></td><td style="display:none;"></td><td>' + name + '</td><td>' + desciption + '</td><td style="display:none;"></td><td><a href="#" class="btn btn-info btnEdit btn-xs"><i class="fa fa-pencil"></i> Edit </a><a href="javascript:void(0)" id=".ID" class="btn btn-danger delete-prompt btn-xs"><i class="fa fa-trash-o"></i>Delete</a></td></tr>');
+                }
+
+                else//update
+                {
+
+                    var name = $("#txtName").val();
+                    var desciption = $("#txtDes").val();
+
+                    var cate = new Object();
+                    cate.ID = idUpdate;
+                    cate.Name = name;
+                    cate.Description = desciption;
+                    cate.IsDelete = isDelete;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Edit","Category")',
+                        data: JSON.stringify(cate),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (rs) {
+
+                        }
+
+                    });
+                    rowTemp.find(".Name").html(name);
+                    rowTemp.find(".Description").html(desciption);
+
+                }
+                $("#MyModal").modal("hide");
+
+                return false;
+            }
+        });
+        //
+
+    });
+    </script>
+    <script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    //
+    //Filter
+
+    $('#false').change(function () {
+        $('tr').show();
+        $('tr:not(:has(th)[4]):not(:contains("False"))').hide();
+        $('.btnKhoiPhuc').hide();
+        $('.delete-prompt').show();
+        $('.btnEdit').show();
+        $(".headings").show();
+
+
+
+    });
+    $('#IsDelete').change(function () {
+        $('tr').show();
+        $('tr:not(:has(th)[4]):not(:contains("True"))').hide();
+        $('.delete-prompt').hide();
+        $('.btnEdit').hide();
+        $('.btnKhoiPhuc').show();
+        $(".headings").show();
+
+    });
+    ///Validate
+    function validateForm() {
+        var x = $("#txtName").val();
+        if (x == "") {
+            $('#lblError').css("display", "block");
+            $('#lblError').html("Bạn phải nhập tên đầy đủ!");
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+

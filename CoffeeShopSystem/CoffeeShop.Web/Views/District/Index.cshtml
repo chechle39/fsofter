@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link href="~/Asserts/DataTables-1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Asserts/DuyVM2.css" rel="stylesheet" />
+    <style>
+        .isa_success {
+            color: #4F8A10;
+            background-color: #DFF2BF;
+        }
+
+        .isa_error {
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+    </style>
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>QUẢN LÝ DANH SÁCH QUẬN - HUYỆN</h2>
+            <div id="divStatusSuccess" class="isa_success">
+                <i class="fa fa-check-circle-o" id="StatusSuccess" style="float:right; display:none; width:auto; height:30px; font-size: 30px;"></i>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel panel-default panel-table" style="margin-top: 20px">
+            <div class="addbtn">
+                <a href="javascript:;" id="btnAddNew" title="Thêm mới" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></a>
+            </div>
+            <div class="lengthpage">
+                <div class="float-left">
+                    <select class="form-control text-center" id="lengthpage">
+                        <option value="0" disabled>Hiển thị</option>
+                        <option selected value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="-1">Tất cả</option>
+                    </select>
+                </div>
+            </div>
+            <div class="lengthpage">
+                <div class="float-left">
+                    <select id="txtIsDeleteOption" class="form-control">
+                        <option value="false">Đang quản lý</option>
+                        <option value="true">Đã xóa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="searchbox">
+
+                <div id="basesearch" class="searchbox-hiden">
+                    <div class="form-groups">
+                        <div class="col-sm-12">
+                            <input type="text" id="search" title="Tên bàn, nhóm bàn, số lượng, mô tả ..." class="form-control" placeholder="Từ khóa">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body clearfix">
+                <table id="myTable" class="table table-striped table-responsive jambo_table bulk_action" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên quận - huyện</th>
+                            <th>Mô tả</th>
+                            <th>ID city</th>
+                            <th>Thuộc thành phố</th>
+                            <th>Đã xóa</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*create popup*@
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:rgba(52,73,94,.94); color:white">
+                <a href="javascript:;" class="close" style="color:white; font-weight:bold" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        <div class="form-group">
+                            <label>Tên quận - huyện (<font color="red">&#42;</font>):</label>
+                            <input type="text" class="form-control" id="txtName" autofocus name="" placeholder="Nhập tên quận - huyện" min="2" maxlength="30" required="required" />
+                            <label id="lblValidateName" style="color:red; display:none"></label>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả:</label>
+                            <input type="text" class="form-control" id="txtDescription" name="" placeholder="Nhập mô tả" />
+                        </div>
+                        <div class="form-horizontal">
+                            <label>Chọn thành phố:</label>
+                        </div>
+                        <div class="input-group">
+                            <select class="form-control" id="txtNameCity" name="">
+                                @Html.Action("PartialListCity", "City")
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" id="btnAddNewCity" title="Thêm thành phố mới"><i class="fa fa-plus"></i></button>
+                                <button class="btn btn-danger" type="button" id="btnCloseAddNewCity" style="display:none" title="Đóng"><i class="fa fa-close"></i></button>
+                            </span>
+                        </div>
+                        <div class="form-group" id="divAddNewCity" style="display:none;  padding: 0 10px 10px 10px; border: 2px solid rgba(52,73,94,.94)">
+                            <div class="row" style="background-color:rgba(52,73,94,.94); color:white; text-align:center; margin-bottom:10px">
+                                <h5>THÊM THÀNH PHỐ - TỈNH THÀNH</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Tên thành phố (<font color="red">&#42;</font>):</label>
+                                    <input type="text" class="form-control" id="txtInsertNameCity" name="" placeholder="Nhập tên thành phố" required />
+                                    <label id="lblValidateNameCity" style="color:red; display:none"></label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Mô tả:</label>
+                                    <input type="text" class="form-control" id="txtInsertDescriptionCity" name="" placeholder="Nhập mô tả" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 10px 0 10px 0">
+                                <a href="javascript:;" class="btn btn-block btn-primary" id="btnAddCity">Lưu</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="javascript:;" class="btn btn-block btn-primary" id="btnAdd">Lưu</a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="javascript:;" class="btn btn-block btn-default" data-dismiss="modal" id="btnCancel">Hủy</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*/create popup*@
+
+@*Create A PopUp Modal For DeleteConfirmation*@
+<div class="modal fade" id="DeleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:rgba(52,73,94,.94); color:white">
+                <a href="javascript:;" class="close" style="color:white; font-weight:bold" data-dismiss="modal">&times;</a>
+                <h4>THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có chắc muốn xóa "<label id="lblName"></label>" ?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</a>
+                <a href="javascript:;" class="btn btn-danger" id="btnConfirmDelete" data-dismiss="modal">Đồng ý</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*/Create A PopUp Modal For DeleteConfirmation*@
+@section js{
+    <script src="~/Content/dist/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Asserts/DataTables-1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="~/Asserts/DataTables-1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/VoCP/district.js"></script>
+}

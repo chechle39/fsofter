@@ -1,0 +1,427 @@
+﻿@using CoffeeShop.Model.ModelEntity;
+@model IEnumerable<Promotion>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+
+}
+
+
+@section js{
+
+    <script src="~/Asserts/jquery-validation-1.17.0/jquery.validate.min.js"></script>
+    <script src="~/Scripts/TrungLM1.js"></script>
+
+    }
+<!-- Content -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>DANH SÁCH KHUYẾN MÃI</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li style="float:right">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content" style="display: block;">
+            <div class="row">
+                    <form id="RadioForm" action="">
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="active" @if (ViewBag.Select == "active") { <text> checked="checked" </text>    }>Đang quản lý
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="delete" @if (ViewBag.Select == "delete") { <text> checked="checked" </text>    }>Đã xóa
+                        </label>
+                    </form>
+                <!-- Advanced Search-->
+                <form id="AdvancedSearch" class="form-inline" action="@Url.Action("AdvancedSearch","Promotion")" style="margin-top:50px">
+                    <div class="form-group">
+                        <label for="NameText" style="margin-left: 10px">Tìm kiếm theo Tên:</label>
+                        <input type="text" class="form-control" id="NameText" name="Name" value="@ViewBag.Name">
+                    </div>
+                    <div class="form-group" style="margin-left:20px">
+                        <label for="StartDate">Từ ngày: </label>
+                        <input type="date" class="form-control" id="StartDate" name="StartDate" value="@ViewBag.StartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="EndDate">Đến ngày: </label>
+                        <input type="date" class="form-control" id="EndDate" name="EndDate" value="@ViewBag.EndDate">
+                    </div>
+                    <!-- Submit -->
+                    <button id="submitSearch" class="btn btn-primary" style="float:right">Tìm kiếm</button>
+                </form>
+            </div>
+            <div class="panel panel-default panel-table" style="margin-top: 20px">
+
+                <div class="panel-heading clearfix">
+                    <div>
+                        <!-- Button Add -->
+                        <div class="col-sm-8">
+                            <a href="javascript:;" data-toggle="modal" data-target="#AddModal" title="Thêm mới" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></a>
+                        </div>
+
+                        <!-- Basic Search-->
+                        <form id="SearchForm" action="@Url.Action("BasicSearch", "Promotion")">
+                            <div class="col-sm-4">
+                                <input id="SearchText" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm khuyến mãi theo tên, mô tả">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sort in table -->
+                <div class="panel-body clearfix">
+                    <table class="table table-striped table-responsive jambo_table bulk_action" id="listTable">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">ID <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(1)">Khuyến Mãi <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(2)">Giảm Giá <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(3)">Chiết Khấu <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(4)">Ngày Bắt Đầu <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(5)">Ngày Kết Thúc <i class="fa fa-sort"></i></th>
+                                <th onclick="sortTable(6)">Mô Tả <i class="fa fa-sort"></i></th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="BodyTable">
+                            @foreach (var i in Model)
+                            {
+                                <!-- item : for Delete (Ajax)-->
+                                <tr id="item-@i.ID">
+                                    <!-- i: for Edit (Edit)-->
+                                    <td id="ID-@i.ID">@i.ID</td>
+
+                                    <td id="Name-@i.ID">@i.Name</td>
+
+                                    <td id="BasePurchase-@i.ID">@i.BasePurchase</td>
+
+                                    <td id="Discount-@i.ID">@i.Discount</td>
+
+                                    <td id="StartDate-@i.ID">@string.Format("{0:MM/dd/yyyy}", i.StartDate)</td>
+
+                                    <td id="EndDate-@i.ID">@string.Format("{0:MM/dd/yyyy}", i.EndDate)</td>
+
+                                    <td id="Description-@i.ID">@i.Description</td>
+
+                                    <!-- 4. Edit, Delete btn-->
+                                    <td>
+                                        
+                                        @if (ViewBag.Select == "delete")
+                                        {
+                                            <a href="javascript:;" class="RecoveryItem btn btn-primary btn-xs" data-toggle="modal" data-target="#RecoveryModal" data-proid="@i.ID" title="Phục hồi">
+                                                <i class="fa fa-reply-all"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:;" class="EditItem btn btn-primary btn-xs" data-toggle="modal" data-target="#EditModal" data-proid="@i.ID" title="Sửa">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a href="javascript:;" class="DeleteItem btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteModal" data-proid="@i.ID" title="Xóa">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Paging -->
+                <div class="panel-footer" id="paging" @if (ViewBag.Count == 0) { <text> hidden</text>}>
+                    <div class="row">
+                        <div class="col col-xs-4">
+                            Page @ViewBag.CurPage of @ViewBag.Pages
+                        </div>
+                        <nav aria-label="Page navigation" style="margin-left:5px">
+                            <ul class="pagination">
+                                <!-- Hide Previous button-->
+                                @if (ViewBag.CurPage == 1)
+                                {
+                                    <li>
+                                        <a href="?page=1&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword" aria-label="Previous" hidden>
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                }
+
+                                else
+                                {
+                                    <!-- Show Previous button-->
+                                    <li>
+                                        <a href="?page=@(ViewBag.CurPage - 1)&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                }
+
+                                <!-- Active / No Active Current Page-->
+                                @for (int i = 1; i <= ViewBag.Pages; i++)
+                                {
+                                    if (ViewBag.CurPage == i)
+                                    {
+                                        <li class="active">
+                                            <a href="?page=@i&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword">@i</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="?page=@i&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword">@i</a>
+                                        </li>
+                                    }
+                                }
+
+                                <!-- Hidden Next Button-->
+                                @if (ViewBag.CurPage == ViewBag.Pages)
+                                {
+                                    <li>
+                                        <a href="?page=@ViewBag.Pages&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword" aria-label="Next" hidden>
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                }
+
+                                else
+                                {
+                                    <!-- Active Next Button-->
+                                    <li>
+                                        <a href="?page=@(ViewBag.CurPage + 1)&select=@ViewBag.Select&Name=@ViewBag.Name&StartDate=@ViewBag.StartDate&EndDate=@ViewBag.EndDate&keyword=@ViewBag.keyword" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Add Modal -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- AddFrom -->
+            <form id="AddForm" method="post" action="@Url.Action("Create","Promotion")">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 style="text-align: center">Thêm Khuyến Mãi</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group has-feedback">
+                        <label for="nametext" class="form-control-label">Tên Khuyến Mãi:</label>
+                        <input type="text" class="form-control" id="nametext" name="Name">
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Ashoptext" name="ShopID" value=1>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stardatetext" class="form-control-label">Bắt Đầu:</label>
+                        <input type="date" name="StartDate" class="form-control datepicker" id="stardatetext" placeholder="mm/dd/yyyy">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="enddatetext" class="form-control-label">Kết Thúc:</label>
+                        <input type="date" name="EndDate" class="form-control datepicker" id="enddatetext" placeholder="mm/dd/yyyy">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchasenumber">Mức Giá:</label>
+                        <div class="input-group col-sm-5">
+                            <input id="purchasenumber" name="BasePurchase" type="number" min="1000" step="1000" required="required" class="form-control" placeholder="Giảm giá">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discountnumber">Chiết Khấu:</label>
+                        <div class="input-group col-sm-5">
+                            <input id="discountnumer" name="Discount" type="number" min="0" step="1" required="required" class="form-control" placeholder="Chiết khấu">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discriptiontextarea" class="form-control-label">Mô Tả:</label>
+                        <textarea class="form-control" id="discriptiontextarea" name="Description"></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="modal-footer">
+                    <button type="button" id="submitAdd" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- GetEditForm-->
+<form id="GetEditForm" action="@Url.Action("GetById", "Promotion")" method="get">
+    <input id="ProIDText" type="hidden" name="idToGet" />
+</form>
+
+<!-- EditModal -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- EditFrom -->
+            <form id="EditForm" method="post" action="@Url.Action("Edit","Promotion")">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <h2 style="text-align: center">Cập Nhật Khuyến Mãi</h2>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="hidden" name="ID" class="form-control" id="EIDtext">
+                    <input type="hidden" name="ShopID" class="form-control" id="EShoptext">
+
+
+                    <div class="form-group">
+                        <label for="Enametext" class="form-control-label">Tên Khuyến Mãi:</label>
+                        <input type="text" name="Name" class="form-control" id="Enametext">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EStartDate" class="form-control-label">Bắt Đầu:</label>
+                        <input type="date" name="StartDate" class="form-control datepicker" id="EStartDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EEndDate" class="form-control-label">Kết Thúc:</label>
+                        <input type="date" name="EndDate" class="form-control datepicker" id="EEndDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Epurchasenumber">Mức Giá:</label>
+                        <div class="input-group col-sm-5">
+                            <input id="Epurchasenumber" name="BasePurchase" type="number" min="1000" step="1000" required="required" class="form-control" placeholder="Giảm giá">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Ediscountnumber">Chiết Khấu:</label>
+                        <div class="input-group col-sm-5">
+                            <input id="Ediscountnumer" name="Discount" type="number" min="0" step="1" required="required" class="form-control" placeholder="Chiết khấu">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Ediscriptiontextarea" class="form-control-label">Mô Tả:</label>
+                        <textarea name="Description" class="form-control" id="Ediscriptiontextarea"></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="modal-footer">
+                    <button type="button" id="submitEdit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- DeleteModal -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- DeleteFrom -->
+            <form id="DeleteForm" method="post" action="@Url.Action("Delete","Promotion")">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <h2 style="text-align: center">Xóa Khuyến Mãi</h2>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="hidden" name="IdToDelete" class="form-control" id="DeleteIDText">
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">Bạn chắc chắn muốn xóa khuyến mãi này ?</label>
+                    </div>
+
+                </div>
+
+                <!-- Submit -->
+                <div class="modal-footer">
+                    <button type="button" id="submitDelete" class="btn btn-primary">Đồng Ý</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>                    
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- RecoveryModal -->
+<div class="modal fade" id="RecoveryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h2 style="text-align: center">Phục Hồi Khuyến Mãi</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" name="IdToRecovery" class="form-control" id="RecoveryIDText">
+                <div class="form-group">
+                    <label class="form-control-label">Bạn chắc chắn muốn phục hồi khuyến mãi này ?</label>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="modal-footer">
+                <button type="button" id="submitRecovery" class="btn btn-primary">Đồng Ý</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>               
+            </div>
+        </div>
+    </div>
+</div>
+
+

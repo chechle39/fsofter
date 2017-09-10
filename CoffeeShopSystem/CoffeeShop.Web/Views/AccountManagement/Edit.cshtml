@@ -1,0 +1,583 @@
+﻿@* Important Note : WARD ,District and City tuse 1st values only , depend on database, must change in this source code*@
+
+@using CoffeeShop.Model.ModelEntity;
+
+@model User
+
+@section css {
+
+    <link href="~/assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <style type="text/css">
+        label {
+            font-weight: normal;
+            color: #262626;
+            font-family: 'Arial Unicode MS';
+            text-decoration: none;
+        }
+
+        /*.btn span.glyphicon {
+            opacity: 0;
+        }
+
+        .btn.active span.glyphicon {
+            opacity: 1;
+        }*/
+
+        .error {
+            color: red;
+        }
+
+        .bigcheckbox {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+}
+
+@section js {
+    <script src="~/assets/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/assets/jquery.validate.min.js"></script>
+    <script src="~/assets/bootstrap v3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+    <script>
+        $(function () {
+
+
+            $("#chkIsDelete").on('click', function () {
+                $(this).val($(this).prop('checked'));
+                //alert($(this).val());
+                //alert($("#chkIsDelete").val());//.is(':checked'));
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+
+                email: "Định dạng email không hợp lệ."
+            });
+
+
+            jQuery.validator.addMethod("isNotContainNumber", function (value, element) {
+                return this.optional(element) || (isNotContainNumber());
+            }, "Số điện thoại không được chứa ký tự.");
+
+
+            //jQuery.validator.addMethod("isAValidEmail", function (value, element) {
+            //    return this.optional(element) || (isAValidEmail());
+            //}, "Định dạng email không hợp lệ.");
+
+
+            jQuery.validator.addMethod("KhongChuaKhoangTrang", function (value, element) {
+                return this.optional(element) || (KhongChuaKhoangTrang());
+            }, "Tên đăng nhập không được chứa khoảng trắng.");
+
+
+            function KhongChuaKhoangTrang() {
+                var inputUsername = $("#username").val();
+
+                console.log(inputUsername);
+                for (var i = 0; i < inputUsername.length; i++) {
+                    if (inputUsername[i] == " ") {
+
+
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+
+
+
+            //date picker section
+            var Over21Age = new Date(); //assume most people using this site have an avg age of 21
+            Over21Age.setFullYear(Over21Age.getFullYear() - 21);
+
+            var Over16Age = new Date();
+            Over16Age.setFullYear(Over16Age.getFullYear() - 16);
+            var stringOver16 = Over16Age.toLocaleDateString('en-US');
+            $("#datepicker").datepicker({
+
+                maxDate: "" + stringOver16 + ""
+
+            });
+
+            var replacetime = "" + ('@Model.Birthday').toString() +"";
+            replacetime = replacetime.replace("12:00AM", "");
+          
+            var date = new Date(replacetime.toString());
+            date = date.toLocaleDateString('en-US');
+            
+            $("#datepicker").datepicker('setDate',date); // start day : age 21 , minimum age :16
+
+
+            //end date picker section
+            $('#cboCity').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+
+                UpdateDistrictList();
+                UpdateWardList();
+
+            });
+
+            $('#cboDistrict').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+
+                UpdateWardList();
+            });
+
+
+
+            $("form[name='editAccountForm']").validate({
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                    Username:
+                        {
+                            required: true,
+                            KhongChuaKhoangTrang: true,
+                            minlength: 5,
+                            maxlength: 16
+
+
+                        },
+
+                    Password:
+                        {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 30
+                        },
+
+                    Name:
+                        {
+                            required: true
+
+                        },
+
+                    reEnterPassword:
+                        {
+                            required: true,
+                            equalTo : "#password"
+
+
+                         },
+                    Email:
+                       {
+                           required :true
+
+                       },
+
+                    Birthdate:
+                        {
+                            required :true
+
+                        },
+
+                    DetailAddress:
+                        {
+                            required:true
+                        },
+
+                    Phone:
+                        {
+                            required :true,
+                            isNotContainNumber : true,
+                            minlength :10
+                        }
+
+
+              },
+                // Specify validation error messages
+                messages: {
+
+                    Phone: {
+                        required: "  Vui lòng nhập số vào trường số điện thoại",
+                        minlength: "  Số điện thoại phải chứa tối thiểu 10 chữ số"
+
+                    },
+
+
+                    Username:
+                       {
+                           required: "Vui lòng nhập vào trường tên đăng nhập",
+                           minlength: "Tên đăng nhập phải chứa tối thiểu 8 ký tự",
+                           maxlength: "Tên đăng nhập chỉ chứa tối đa 16 ký tự"
+
+                       },
+                    Password:
+                        {
+                            required: "Vui lòng nhập vào trường mật khẩu",
+                            minlength: "Mật khẩu phải chứa tối thiểu 8 ký tự",
+                            maxlength: "Mật khẩu chỉ chứa tối đa 30 ký tự"
+                        },
+                    Name:
+                        {
+                            required: "Vui lòng nhập vào trường Họ và Tên"
+
+                        },
+                    reEnterPassword:
+                        {
+                            required: "Vui lòng nhập vào trường Nhập lại mật khẩu",
+                            equalTo : "Mật khẩu nhập lại không khớp"
+                         },
+                    Email:
+                       {
+                           required :"Vui lòng nhập vào trường Email"
+
+                       },
+
+                    Birthdate:
+                        {
+                            required : "Vui lòng lựa chọn ngày sinh"
+
+                        },
+
+                    DetailAddress:
+                        {
+                            required: "Vui lòng nhập vào trường Địa chỉ"
+                        },
+
+                },
+
+
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+
+                errorElement: 'div',
+                errorLabelContainer: ".errorText",
+                submitHandler: function (form) {
+                    // khi có ajax thì không dùng form.submit()
+                   form.submit();
+
+                }
+            });
+
+
+
+
+
+        });
+
+
+        function isNotContainNumber()
+        {
+            var inputPhone = $("#txtPhone").val();
+
+            console.log(inputPhone);
+            for (var i = 0; i < inputPhone.length; i++)
+            {
+                if (isNaN(inputPhone[i]))
+                {
+
+
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //function isAValidEmail()
+        //{
+        //    var inputEmail = $("#email").val();
+
+        //    console.log(inputEmail);
+        //    var pattern = new RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
+        //    var result = pattern.test(inputEmail);
+        //    console.log(result);
+        //    return result;
+
+        //}
+
+
+
+
+
+        function UpdateDistrictList() {
+
+            var cityID = $('#cboCity').val();
+            url = "/AccountManagement/UpdateDistrictList?cityID=" + cityID;
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                timeout: 30 * 1000,
+                async : false
+
+            })
+
+
+
+         .done(function (data) {
+
+             $('#cboDistrict').html("");
+             $.each(data, function (i, district) {
+
+
+               //  var onlydate = user.birthdate.split("12:00AM");
+                // console.log(onlydate);
+
+                 var html =
+                     '<option value="' + district.ID + '">' + district.Name + '</option>';
+
+
+                 $('#cboDistrict').append(html);
+             });
+
+         })
+            .fail(function (jqXHR, textStatus, error) {
+                $('#cboDistrict').html("");
+                alert("district ajax error");
+
+
+            });
+        }
+
+
+
+        function UpdateWardList() {
+
+            var districtID = $('#cboDistrict').val();
+            url = "/AccountManagement/UpdateWardList?districtID=" + districtID;
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                timeout: 30 * 1000,
+                async: false
+
+            })
+
+
+
+         .done(function (data) {
+
+             $('#cboWard').html("");
+             $.each(data, function (i, ward) {
+                 console.log(data);
+
+                 //  var onlydate = user.birthdate.split("12:00AM");
+                 // console.log(onlydate);
+
+                 var html =
+                     '<option value="' + ward.ID + '">' + ward.Name + '</option>';
+
+                 console.log(html);
+
+                 $('#cboWard').append(html);
+             });
+
+         })
+            .fail(function (jqXHR, textStatus, error) {
+                $('#cboWard').html("");
+                alert(" ward ajax error");
+
+
+            });
+        }
+
+
+        //$("#lblIsDelete").on("click", function () {
+
+        //    var btnChecked = $("#lblIsDelete");
+
+        //    if (btnChecked.hasClass("active")) {
+        //        btnChecked.removeClass("active");
+        //        btnChecked.removeClass("btn-success");
+        //        btnChecked.addClass("btn-default");
+
+        //        $('#chkIsDelete').attr('checked', false);
+        //        alert($("#chkIsDelete").is(':checked'));
+
+
+        //    }
+        //    else {
+        //        btnChecked.addClass("active");
+        //        btnChecked.addClass("btn-success");
+        //        $('#chkIsDelete').attr('checked', true);
+        //        alert($("#chkIsDelete").is(':checked'));
+
+        //    }
+        //});
+
+
+
+
+
+
+
+
+    </script>
+}
+
+
+<form class="form-horizontal" method="post" action="" name="editAccountForm" id="editAccountForm">
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Username : </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="username" name="Username" readonly="readonly" value="@Model.Username" />
+        </div>
+        <label for="fullName" class="col-sm-2 control-label">Họ và tên: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="fullName" name="Name" value="@Model.Name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Mật khẩu: </label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="password" name="Password" />
+
+        </div>
+        <label for="reEnterPassword" class="col-sm-2 control-label">Nhập lại mật khẩu: </label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="reEnterPassword" name="reEnterPassword" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email:</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" />
+        </div>
+
+        <label for="city" class="col-sm-2 control-label">Thành phố:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="cboCity">
+
+                <option value="5">TPHCM</option>
+                <option value="6">Hà Nội</option>
+
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Quận : </label>
+        <div class="col-sm-4">
+            <select class="form-control" id="cboDistrict">
+                <option value="3">Quận 1</option>
+                <option value="4">Quận 2</option>
+                <option value="5">Quận 3</option>
+                <option value="6">Quận 4</option>
+                <option value="7">Quận 5</option>
+                <option value="8">Quận 6</option>
+                <option value="9">Quận 7</option>
+                <option value="10">Quận 8</option>
+                <option value="11">Quận 9</option>
+                <option value="12">Quận 10</option>
+                <option value="13">Quận 11</option>
+
+                <option value="14">Quận 12</option>
+                <option value="15">Quận Tân Bình</option>
+                <option value="16">Quận Bình Thạnh</option>
+                <option value="17">Quận Gò Vấp</option>
+                <option value="18">Quận Thủ Đức</option>
+                <option value="19">Quận Phú Nhuận</option>
+                <option value="20">Quận Tân Phú</option>
+                <option value="21">Quận Bình Tân</option>
+                <option value="22">Huyện Bình Chánh</option>
+                <option value="23">Huyện Nhà Bè </option>
+                <option value="24">Huyện Cần Giờ</option>
+                <option value="25">Huyện Hóc Môn</option>
+
+
+            </select>
+        </div>
+        <label class="col-sm-2 control-label">Phường : </label>
+
+        <div class="col-sm-4">
+            <select class="form-control" id="cboWard" name="WardID">
+                <option value="1">Phường An Phú</option>
+                <option value="63">Phường Bình An</option>
+                <option value="64">Phường Bình Trưng Đông</option>
+                <option value="65">Phường Bình Trưng Tây</option>
+                <option value="66">Phường Bình Khánh</option>
+                <option value="67">Phường An Khánh</option>
+                <option value="68">Phường Cát Lái</option>
+                <option value="69">Phường Thạnh Mỹ Lợi</option>
+                <option value="70">Phường An Lợi Đông</option>
+                <option value="71">Phường Thủ Thiêm</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="txtAddress" class="col-sm-2 control-label">Giới tính :</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="cboGender" name="Gender">
+                <option value="Nam" @if (Model.Sex == "Nam") {<text>selected</text> }
+                        >Nam</option>
+                <option value="Nữ" @if (Model.Sex == "Nữ") {<text>selected</text> }>Nữ</option>
+            </select>
+        </div>
+        <label for="txtBirthdate" class="col-sm-2 control-label">Ngày sinh :</label>
+        <div class="col-sm-4">
+            <input type="text" id="datepicker" class="form-control" name="Birthdate"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="txtAddress" class="col-sm-2 control-label">Địa chỉ :</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="txtAddress" name="DetailAddress" value="@Model.DetailAddress" />
+        </div>
+        <label for="txtBirthdate" class="col-sm-2 control-label">Số điện thoại :</label>
+        <div class="col-sm-4">
+            <input type="text" id="txtPhone" class="form-control" name="Phone" value="@Model.Phone" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-2 control-label">Mô tả:</div>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="txtFullDes" name="Description">@Model.Description</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2 control-label">Đã Xóa?</div>
+        @*<div id="isDeleteDiv" class="col-sm-10 btn-group" data-toggle="buttons">
+            <label id="lblIsDelete">*@
+        <div class="col-sm-4">
+            <input id="chkIsDelete" name="IsDelete" type="checkbox" @if (@Model.IsDelete == true) {<text>checked="checked"</text> }>
+
+
+</div>
+
+        @*</label>
+
+            </div>*@
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-danger">
+                <i class="glyphicon glyphicon-save"></i>&nbsp;Lưu
+            </button>
+            <a href="@Url.Action("Index","AccountManagement")" class="btn btn-success">
+                <i class="glyphicon glyphicon-share-alt"></i>&nbsp;Danh sách tài khoản
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+
+</form>
+
+
+
